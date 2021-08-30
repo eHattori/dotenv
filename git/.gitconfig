@@ -1,0 +1,21 @@
+[user]
+  name = Eduardo Hattori
+  email = eduardohattorif@gmail.com
+[pull]
+  rebase = false
+
+[color]
+    status = auto
+    branch = auto
+    interactive = auto
+    diff = auto
+
+[core]
+    editor = nvim 
+
+[includeIf "gitdir:~/~/projects/pipefy/"]
+  path = .gitconfig-pipefy
+
+[pretty]
+    pretty-history = format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
+
