@@ -116,6 +116,7 @@ alias pbpaste='xclip -selection clipboard -o'
 
 # Config CTX
 export PATH=$PATH:$HOME/binxport PATH=$PATH:$HOME/.ctx/ctx.sh
+. $HOME/.ctx/ctx.sh
 
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
@@ -126,4 +127,5 @@ export PYENV_VERSION="3.7.1"
 eval "$(pyenv init --path)"
 
 [ -f ~/dev/config/vars ] && source ~/dev/config/vars
+export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/bin

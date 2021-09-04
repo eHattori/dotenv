@@ -3,6 +3,8 @@
   title_hide_sizetext = True
   title_font = MesloLGS NF Bold 9
 [keybindings]
+  cycle_next = ""
+  cycle_prev = ""
   go_up = ""
   go_down = ""
   go_left = <Primary><Shift>Left

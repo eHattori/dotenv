@@ -29,10 +29,10 @@ call plug#begin('~/.local/share/nvim/plugged')
      \ }
 
  " Ruby
+ Plug 'vim-ruby/vim-ruby'
  Plug 'tpope/vim-rails'
  Plug 'tpope/vim-bundler'
  Plug 'tpope/vim-rake'
  Plug 'janko-m/vim-test'
  Plug 'ngmy/vim-rubocop'
- Plug 'codota/tabnine-vim'
 call plug#end()
