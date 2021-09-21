@@ -54,7 +54,7 @@ endfunction
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>a  :<C-u>Cocdiagnostics<cr>
 " Manage extensions.
 nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
@@ -72,7 +72,6 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " ----------------- END ---------------------------
 
 " ----------------- MOVE LINE UP/DOWN AND DUPPLICATE -------------
-nnoremap <silent> <A-Up> :m .-2<CR>==
 nnoremap <silent> <A-Down> :m .+1<CR>==
 inoremap <silent> <A-Up> <Esc>:m .-2<CR>==gi
 inoremap <silent> <A-Down> <Esc>:m .+1<CR>==gi

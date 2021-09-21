@@ -129,3 +129,8 @@ eval "$(pyenv init --path)"
 [ -f ~/dev/config/vars ] && source ~/dev/config/vars
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/bin
+eval "$(pyenv virtualenv-init -)"
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+

@@ -8,8 +8,8 @@ call plug#begin('~/.local/share/nvim/plugged')
  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
  Plug 'ryanoasis/vim-webdevicons'
  Plug 'vim-airline/vim-airline'
+ Plug 'vim-airline/vim-airline-themes'
  Plug 'rafi/awesome-vim-colorschemes'
- " Plug 'rakr/vim-one'
  Plug 'dracula/vim', { 'as': 'dracula' }
  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
  Plug 'junegunn/fzf.vim'
@@ -18,7 +18,6 @@ call plug#begin('~/.local/share/nvim/plugged')
  Plug 'ryanoasis/vim-devicons'
  Plug 'jiangmiao/auto-pairs'
  Plug 'mhinz/vim-signify'
- Plug 'mg979/vim-xtabline'
  Plug 'RRethy/vim-illuminate'
  Plug 'Yggdroot/indentLine'
  Plug 'lukas-reineke/indent-blankline.nvim'

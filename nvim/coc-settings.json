@@ -50,13 +50,6 @@
     "diagnostic.infoSign": "ℹ",
     "diagnostic.hintSign": "➤",
     "diagnostic.checkCurrentLine": true,
-    "diagnostic.refreshOnInsertMode": false,
-    "diagnostic.refreshAfterSave": false,
-    "diagnostic.messageTarget": "float",
-    "diagnostic.separateRelatedInformationAsDiagnostics": true,
-    "diagnostic.virtualText": true,
-    "diagnostic.displayByAle": true,
-    "diagnostic.virtualTextCurrentLineOnly": true,
     "solargraph.diagnostics": true,
     "solargraph.autoformat": true,
     "solargraph.formatting": true,
@@ -68,6 +61,8 @@
         "~/.config/nvim/utils/snips"
     ],
     "coc.preferences.colorSupport": true,
-    "highlight.colors.enable": true
+    "highlight.colors.enable": true,
+    "python.linting.enabled": true,
+    "python.linting.lintOnSave": true
 }
 

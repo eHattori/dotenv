@@ -58,7 +58,7 @@ set scrolljump=5
 set lazyredraw
 set redrawtime=10000
 set synmaxcol=180
-set re=1
+" set re=1
 
 " required by coc
 set nobackup                                                  " some servers have issues with backup files
