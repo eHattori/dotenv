@@ -60,12 +60,13 @@ export HISTFILESIZE=10000
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  asdf
   git
   dotenv
   pip
   pyenv
   python
-  zsh_reload
+  # zsh_reload
   zsh-syntax-highlighting
   zsh-autosuggestions
   kubectl

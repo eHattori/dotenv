@@ -34,4 +34,7 @@ call plug#begin('~/.local/share/nvim/plugged')
  Plug 'tpope/vim-rake'
  Plug 'janko-m/vim-test'
  Plug 'ngmy/vim-rubocop'
-call plug#end()
+
+ " Elixir
+ Plug 'elixir-editors/vim-elixir'
+ call plug#end()
