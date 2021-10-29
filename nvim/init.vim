@@ -2,15 +2,15 @@ set nocompatible
 let s:config_path = $HOME.'/.config/nvim/'
 
 let s:config_files = [
-			\'functions.vim',
-			\'plugins.vim',
-			\'mappings.vim'
-			\]
+      \'functions.vim',
+      \'plugins.vim',
+      \'mappings.vim'
+      \]
 
 for file in s:config_files
-	if filereadable(s:config_path.file)
-		exec "so ".s:config_path.file
-	endif
+  if filereadable(s:config_path.file)
+    exec "so ".s:config_path.file
+  endif
 endfor
 
 " ---------- COMMON FLAGS -----------
@@ -21,15 +21,11 @@ set hlsearch
 set nowrap
 set colorcolumn=120
 set clipboard=unnamedplus
-set autochdir
 set cursorline
 set ruler
 set ttyfast
 set laststatus=2
-" set list listchars=tab:»·,nbsp:+,trail:·,extends:→,precedes:← " show hidden characters
 set maxmempattern=100000                                      " max mem to use
-" set shortmess=aoOTIcF                                         " status messages
-" set showbreak=↳\ \                                            " show when lines wrap
 
 set title                                                     " tab title as file name
 set noshowmode                                                " dont show current mode below statusline
@@ -47,10 +43,9 @@ set foldlevel=99                                               " open all folds 
 set foldmethod=syntax                                         " config fold to syntax
 set inccommand=nosplit                                        " visual feedback while substituting
 set showtabline=2                                             " always show tabline
-set grepprg=rg\ --vimgrep                                     " use rg as default grepper
 set smartcase                                                 " if searching text contains uppercase case will not be ignored
-" set encoding=utf-8                                            " set internal encoding of vim
 set encoding=UTF-8
+
 " performance tweaks
 set nocursorline
 set nocursorcolumn
@@ -58,7 +53,6 @@ set scrolljump=5
 set lazyredraw
 set redrawtime=10000
 set synmaxcol=180
-" set re=1
 
 " required by coc
 set nobackup                                                  " some servers have issues with backup files
@@ -72,28 +66,133 @@ set signcolumn=yes                                            " always show the 
 syntax enable
 syntax on
 colorscheme dracula
-" colorscheme_bg = "dark"
 set t_Co=256
 set shell=/bin/zsh
 set termguicolors
 set background=dark
 
 set tabstop=2       " The width of a TAB is set to 4.
-                    " Still it is a \t. It is just that
-                    " Vim will interpret it to be having
-                    " a width of 4.
+" Still it is a \t. It is just that
+" Vim will interpret it to be having
+" a width of 4.
 
 set shiftwidth=2    " Indents will have a width of 4
-
 set softtabstop=2   " Sets the number of columns for a TAB
-
 set expandtab       " Expand TABs to spaces
-
 set cursorline
-" hi cursorline cterm=none term=none
-" autocmd WinEnter * setlocal cursorline
-" autocmd WinLeave * setlocal nocursorline
-" highlight CursorLine guibg=#333333 ctermbg=234
 
-" Auto change directory to current dir
-autocmd BufEnter * silent! lcd %:p:h
+let g:dashboard_default_executive ='telescope'
+let g:dashboard_custom_shortcut={
+      \ 'last_session'       : '',
+      \ 'find_history'       : '',
+      \ 'find_file'          : '',
+      \ 'new_file'           : '',
+      \ 'change_colorscheme' : '',
+      \ 'find_word'          : '',
+      \ 'book_marks'         : '',
+      \ }
+
+let g:dashboard_custom_header = [
+    \'',
+    \'   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣭⣿⣶⣿⣦⣼⣆         ',
+    \'    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
+    \'          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷⠄⠄⠄⠄⠻⠿⢿⣿⣧⣄     ',
+    \'           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ',
+    \'          ⢠⣿⣿⣿⠈  ⠡⠌⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ',
+    \'   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘⠄ ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ',
+    \'  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ',
+    \' ⣠⣿⠿⠛⠄⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ',
+    \' ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇⠄⠛⠻⢷⣄ ',
+    \'      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ',
+    \'       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ',
+   \'',
+    \]
+
+
+
+set completeopt=menu,menuone,noselect
+
+lua <<EOF
+-- Setup nvim-cmp.
+local cmp = require'cmp'
+local nvim_lsp = require('lspconfig')
+local lspkind = require('lspkind')
+
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    additional_vim_regex_highlighting = false,
+  },
+}
+
+
+cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
+    formatting = {
+      format = lspkind.cmp_format({with_text = true, maxwidth = 150, ({
+      vsnip = '[VSnip]'
+    })})
+      },
+    mapping = {
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.close(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      },
+    sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' }, -- For vsnip users.
+    { name = 'buffer' }
+    })
+  })
+
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+
+end
+
+-- Setup lspconfig.
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+-- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+local servers = {
+  'tsserver',
+  'eslint',
+  'yamlls',
+  'tsserver',
+  'jsonls',
+  'bashls',
+  'cssls',
+  'pyright',
+  'solargraph',
+  'html',
+  'dockerls',
+  'erlangls',
+  'angularls',
+  }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+      flags = {
+          debounce_text_changes = 150,
+      },
+      capabilities = capabilities,
+    }
+end
+EOF
