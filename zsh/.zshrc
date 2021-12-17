@@ -135,3 +135,13 @@ eval "$(pyenv virtualenv-init -)"
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
+export DOCKERHOST=$(ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+')
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/usr/local/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/bin/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/usr/local/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/bin/google-cloud-sdk/completion.zsh.inc'; fi
+. "/home/hattori/.acme.sh/acme.sh.env"
+
+export SYSCONFDIR="$HOME/.config/dunst/dunstrc" 
