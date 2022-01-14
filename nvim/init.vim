@@ -112,6 +112,8 @@ let g:dashboard_custom_header = [
 
 set completeopt=menu,menuone,noselect
 
+hi Visual term=reverse cterm=reverse guibg=Grey
+
 lua <<EOF
 -- Setup nvim-cmp.
 local cmp = require'cmp'
@@ -195,4 +197,21 @@ for _, lsp in ipairs(servers) do
       capabilities = capabilities,
     }
 end
+
+nvim_lsp.gopls.setup {
+	cmd = {'gopls'},
+	-- for postfix snippets and analyzers
+	capabilities = capabilities,
+	    settings = {
+	      gopls = {
+		      experimentalPostfixCompletions = true,
+		      analyses = {
+		        unusedparams = true,
+		        shadow = true,
+		     },
+		     staticcheck = true,
+		    },
+	    },
+	on_attach = on_attach,
+}
 EOF

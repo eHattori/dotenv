@@ -1,4 +1,4 @@
-inoremap jk <ESC>
+" inoremap jk <ESC>
 " " GoTo code navigation.
 nmap <silent> <F12> :Telescope lsp_definitions<CR>
 nmap <silent> <F8> :Telescope lsp_references<CR>
@@ -23,7 +23,7 @@ vnoremap <C-C> :w !xclip -i -sel c<CR>>             " copy selection
 nnoremap <c-z> :u<CR>                                  " undo
 inoremap <c-z> <c-o>:u<CR>
 
-noremap <c-I> :Autoformat<CR>                          " format file or selection
+noremap <F3> :Autoformat<CR>                          " format file or selection
 noremap <c-s> :w <CR>                                  " save
 
 
@@ -42,6 +42,7 @@ noremap <c-K> dd<CR>                                   " delete line or sellecti
 
 " shift+arrow selection
 nmap <S-Up> v<Up>
+nmap <S-End> vg$<Right>
 nmap <S-Down> v<Down>
 nmap <S-Left> v<Left>
 nmap <S-Right> v<Right>
@@ -54,8 +55,6 @@ imap <S-Down> <Esc>v<Down>
 imap <S-Left> <Esc>v<Left>
 imap <S-Right> <Esc>v<Right>
 
-
-nnoremap <c-M> :TroubleToggle<CR>
 " ----------------- END ----------------------------
 
 " ----------------- NERDTree CONFIG ----------------
@@ -153,25 +152,32 @@ let g:ag_working_path_mode="r"
 
 nmap <F5> <Plug>(lcn-menu)
 
+
 " === Tab management
-" ===
-" Create a new tab with tu
-" noremap <c-n> :tab split<CR>
-" Move around tabs with tn and ti
-" map <C-'> gt
-" map <c-1> gt
-" Move the tabs with tmn and tmi
-noremap tmn :-tabmove<CR>
-noremap tmi :+tabmove<CR>
+noremap <c-i> :bnext<CR>
+noremap <c-I> :bprev<CR>
+
+nnoremap <a-w> :Bdelete<CR>
 
 " Resize splits with arrow keys
-noremap '<up> :res +5<CR>
-noremap '<down> :res -5<CR>
-noremap '<left> :vertical resize-5<CR>
-noremap '<right> :vertical resize+5<CR>
+noremap 1<up> :res +5<CR>
+noremap 1<down> :res -5<CR>
+noremap 1<left> :vertical resize-5<CR>
+noremap 1<right> :vertical resize+5<CR>
 
 let g:indentLine_char = '│'
 let g:indentLine_concealcursor = 'inc'
 let g:indentLine_conceallevel = 2
 let g:indentLine_fileTypeExclude = ['dashboard']
-autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
+
+" esc in insert mode
+inoremap kj <esc>
+
+" esc in command mode
+cnoremap kj <C-C>
+" Note: In command mode mappings to esc run the command for some odd
+" historical vi compatibility reason. We use the alternate method of
+" existing which is Ctrl-C
+
+
+" autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>

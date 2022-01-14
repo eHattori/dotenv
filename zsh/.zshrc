@@ -111,6 +111,7 @@ source ~/.rvm/scripts/rvm
 alias ag="ag --hidden --skip-vcs-ignores --ignore=\"*Library*\" --ignore=\"*.gem*\" --ignore=\"*.build*\" --ignore=\"*.git*\""
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+alias ls="ls -lah"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -144,4 +145,11 @@ if [ -f '/usr/local/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/bin
 if [ -f '/usr/local/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/bin/google-cloud-sdk/completion.zsh.inc'; fi
 . "/home/hattori/.acme.sh/acme.sh.env"
 
-export SYSCONFDIR="$HOME/.config/dunst/dunstrc" 
+export SYSCONFDIR="$HOME/.config/dunst/dunstrc"
+
+
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/go/
+export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+
+

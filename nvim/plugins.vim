@@ -30,6 +30,7 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'glepnir/dashboard-nvim'
+Plug 'moll/vim-bbye'
 
  " Language server
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -39,6 +40,8 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'OmniSharp/omnisharp-vim'
 
  " For vsnip users.
 Plug 'hrsh7th/cmp-vsnip'
