@@ -152,4 +152,6 @@ export GOPATH=$HOME/go
 export GOROOT=/usr/local/go/
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
+eval $(ssh-agent -s) &>/dev/null
+ssh-add ~/.ssh/id_rsa_gitlab_cloudmed &>/dev/null
 
