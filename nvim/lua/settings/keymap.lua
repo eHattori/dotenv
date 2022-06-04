@@ -58,8 +58,9 @@ vim.cmd([[
 
 ---------------- Tab management
 vim.cmd([[
-    noremap <A-j> :bnext<CR>
-    noremap <A-k> :bprev<CR>
+    noremap <A-k> :bnext<CR>
+    noremap <A-j> :bprev<CR>
+    noremap <A-w> :bdelete \| :bnext <CR>
     ]])
     
 ---------------- Terminal
