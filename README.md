@@ -8,7 +8,7 @@ The project is constantly changing
 
 **INSTALLATION**
 ```console
-[git clone git@github.com:crivotz/nv-ide.git](https://github.com/eHattori/dotenv) ~/.eh-ide
+[git clone github.com/eHattori/dotenv.git](https://github.com/eHattori/dotenv) ~/.eh-ide
 cd ~/.config
 ln -s ~/.eh-ide/nvim nvim
 nvim
