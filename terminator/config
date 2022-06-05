@@ -19,12 +19,12 @@
     background_darkness = 0.94
     background_type = transparent
     cursor_color = "#aaaaaa"
-    font = MesloLGS NF Bold 10
+    font = MesloLGS NF Bold 9
     show_titlebar = False
-    palette = "#363636:#ff0883:#83ff08:#ff8308:#0883ff:#8308ff:#08ff83:#b6b6b6:#424242:#ff1e8e:#8eff1e:#ff8e1e:#1e8eff:#8e1eff:#1eff8e:#c2c2c2"
+    palette = "#000000:#cd0000:#00cd00:#cdcd00:#0000cd:#cd00cd:#00cdcd:#faebd7:#404040:#ff0000:#00ff00:#ffff00:#0000ff:#ff00ff:#00ffff:#ffffff"
     login_shell = True
     use_system_font = False
-    bold_is_bright = True
+    use_theme_colors = True
 [layouts]
   [[default]]
     [[[window0]]]

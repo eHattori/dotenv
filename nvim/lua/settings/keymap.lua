@@ -23,7 +23,9 @@ vim.keymap.set('v', '<C-C>', ':w !xclip -i -sel c<CR>>', {noremap = true, silent
 vim.keymap.set('n', '<c-z>', ':u<CR>', {noremap = true, silent = false})
 vim.keymap.set('i', '<c-z>', '<c-o>:u<CR>', {noremap = true, silent = false})
 
-vim.keymap.set('n', '<F3>', ':FormatWrite<CR>', {noremap = true, silent = false})
+
+vim.keymap.set('n', '<F3>', ':lua vim.lsp.buf.formatting()<CR>', {noremap = true, silent = true})
+-- vim.keymap.set('n', '<F3>', ':FormatWrite<CR>', {noremap = true, silent = false})
 vim.keymap.set('n', '<c-s>', ':w<CR>', {noremap = true, silent = false})
 vim.keymap.set('n', '<c-q>', ':q<CR>', {noremap = true, silent = false})
 
@@ -56,14 +58,21 @@ vim.cmd([[
 ]])
 
 
----------------- Tab management
+---------------- Tab management -------------------------
 vim.cmd([[
     noremap <A-k> :bnext<CR>
     noremap <A-j> :bprev<CR>
     noremap <A-w> :bdelete \| :bnext <CR>
     ]])
     
----------------- Terminal
+---------------- Terminal ------------------------------
 vim.keymap.set('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>')
 vim.keymap.set('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
+
+
+---------------- Trouble -----------------
+vim.keymap.set("n", "<A-x>", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
+vim.keymap.set("n", "<A-f>", "<cmd>Trouble quickfix<cr>", {silent = true, noremap = true})
+
+
 

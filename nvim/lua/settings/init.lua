@@ -38,7 +38,7 @@ vim.opt.signcolumn = 'yes'
 vim.opt.shortmess:append { c = true, S = true }
 vim.opt.shell = '/bin/zsh'
 vim.opt.termguicolors = true
-vim.opt.background = 'dark'
+vim.opt.background = 'light'
 
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -48,5 +48,6 @@ vim.opt.cursorline = true
 
 vim.cmd('syntax enable')
 vim.cmd('syntax on')
-vim.cmd('colorscheme nord')
 vim.cmd('set t_Co=256')
+vim.cmd('colorscheme codedark')
+vim.cmd('set background=light')

@@ -84,6 +84,7 @@ return require('packer').startup(function(use)
 
   -- Color
   use { 'crivotz/nvim-colorizer.lua', config = lua_path"colorizer" }
+  use { 'folke/lsp-colors.nvim'}
 
   -- Git
   use { 'APZelos/blamer.nvim', config = lua_path"blamer" }  
@@ -107,13 +108,19 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-jdaddy' }
   use { 'tpope/vim-fugitive' }
   use { 'tpope/vim-commentary' }
+  use { 'vim-ruby/vim-ruby' }
 --  use { 'github/copilot.vim', config = lua_path"copilot" }
 
   -- Tmux
   use { 'christoomey/vim-tmux-navigator' }
 
+  -- Folkes
+   use { 'folke/trouble.nvim' }
+
   -- Colorschema
   use { 'arcticicestudio/nord-vim' }
+  use { 'rafi/awesome-vim-colorschemes' }
+  use { 'tomasiser/vim-code-dark'}
 
   -- Debugger
 --  use { 'mfussenegger/nvim-dap', config = lua_path"nvim-dap" }
