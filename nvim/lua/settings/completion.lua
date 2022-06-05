@@ -139,16 +139,14 @@ for _, lsp in ipairs(servers) do
 end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    signs = {
-     severity_limit='all'
-     },
-    underline = true,
-    update_in_insert = true,
-    virtual_text = {
-      spacing = 2,
-     severity_limit='Error'     },
-  }
+	vim.lsp.diagnostic.on_publish_diagnostics, {
+		virtual_text = false,
+		underline = true,
+		signs = true,
+	}
 )
-
-
+vim.cmd [[
+  set updatetime=1000
+  autocmd CursorHold * lua vim.diagnostic.open_float() 
+  autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
+]]

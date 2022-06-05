@@ -44,7 +44,6 @@ return require('packer').startup(function(use)
   use { 'lukas-reineke/cmp-rg' }
   use { 'quangnguyen30192/cmp-nvim-tags' }
   use { 'rafamadriz/friendly-snippets' }
-  use { 'jiangmiao/auto-pairs' }
   use { 'windwp/nvim-autopairs', config = lua_path"nvim-autopairs" } 
   use { 'andymass/vim-matchup' }
 
