@@ -426,6 +426,42 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: indent-blankline.nvim
+time([[Config for indent-blankline.nvim]], true)
+require'plugins.indent-blankline'
+time([[Config for indent-blankline.nvim]], false)
+-- Config for: blamer.nvim
+time([[Config for blamer.nvim]], true)
+require'plugins.blamer'
+time([[Config for blamer.nvim]], false)
+-- Config for: nerdtree
+time([[Config for nerdtree]], true)
+require'plugins.nerdtree'
+time([[Config for nerdtree]], false)
+-- Config for: indentLine
+time([[Config for indentLine]], true)
+require'plugins.indentLine'
+time([[Config for indentLine]], false)
+-- Config for: FTerm.nvim
+time([[Config for FTerm.nvim]], true)
+require'plugins.fterm'
+time([[Config for FTerm.nvim]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+require'plugins.treesitter'
+time([[Config for nvim-treesitter]], false)
+-- Config for: nvim-colorizer.lua
+time([[Config for nvim-colorizer.lua]], true)
+require'plugins.colorizer'
+time([[Config for nvim-colorizer.lua]], false)
+-- Config for: vim-webdevicons
+time([[Config for vim-webdevicons]], true)
+require'plugins.web-devicons'
+time([[Config for vim-webdevicons]], false)
+-- Config for: vim-airline
+time([[Config for vim-airline]], true)
+require'plugins.vim-airline'
+time([[Config for vim-airline]], false)
 -- Config for: nvim-gps
 time([[Config for nvim-gps]], true)
 require'plugins.nvim-gps'
@@ -442,54 +478,18 @@ time([[Config for nvim-autopairs]], false)
 time([[Config for minimap.vim]], true)
 require'plugins.minimap'
 time([[Config for minimap.vim]], false)
--- Config for: FTerm.nvim
-time([[Config for FTerm.nvim]], true)
-require'plugins.fterm'
-time([[Config for FTerm.nvim]], false)
--- Config for: blamer.nvim
-time([[Config for blamer.nvim]], true)
-require'plugins.blamer'
-time([[Config for blamer.nvim]], false)
--- Config for: nvim-notify
-time([[Config for nvim-notify]], true)
-require'plugins.nvim-notify'
-time([[Config for nvim-notify]], false)
--- Config for: vim-webdevicons
-time([[Config for vim-webdevicons]], true)
-require'plugins.web-devicons'
-time([[Config for vim-webdevicons]], false)
--- Config for: vim-airline
-time([[Config for vim-airline]], true)
-require'plugins.vim-airline'
-time([[Config for vim-airline]], false)
--- Config for: nerdtree
-time([[Config for nerdtree]], true)
-require'plugins.nerdtree'
-time([[Config for nerdtree]], false)
--- Config for: indentLine
-time([[Config for indentLine]], true)
-require'plugins.indentLine'
-time([[Config for indentLine]], false)
 -- Config for: octo.nvim
 time([[Config for octo.nvim]], true)
 require'plugins.octo'
 time([[Config for octo.nvim]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-require'plugins.treesitter'
-time([[Config for nvim-treesitter]], false)
--- Config for: nvim-colorizer.lua
-time([[Config for nvim-colorizer.lua]], true)
-require'plugins.colorizer'
-time([[Config for nvim-colorizer.lua]], false)
 -- Config for: dashboard-nvim
 time([[Config for dashboard-nvim]], true)
 require'plugins.dashboard-nvim'
 time([[Config for dashboard-nvim]], false)
--- Config for: indent-blankline.nvim
-time([[Config for indent-blankline.nvim]], true)
-require'plugins.indent-blankline'
-time([[Config for indent-blankline.nvim]], false)
+-- Config for: nvim-notify
+time([[Config for nvim-notify]], true)
+require'plugins.nvim-notify'
+time([[Config for nvim-notify]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)

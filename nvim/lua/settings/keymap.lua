@@ -18,6 +18,7 @@ vim.keymap.set('n', '<c-A-S-Up>', "yyp<CR>", {noremap = true, silent = true})
 
 ----------------- UTILS --------------------------
 vim.keymap.set('n', '<C-_>', ':Commentary<CR>', {noremap = true, silent = false})
+vim.keymap.set('v', '<C-_>', ':Commentary<CR>', {noremap = true, silent = false})
 vim.keymap.set('v', '<C-C>', ':w !xclip -i -sel c<CR>>', {noremap = true, silent = false})
 
 vim.keymap.set('n', '<c-z>', ':u<CR>', {noremap = true, silent = false})
