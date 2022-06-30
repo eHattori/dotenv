@@ -30,28 +30,31 @@ return require('packer').startup(function(use)
   use { 'neovim/nvim-lspconfig' }
   use { 'onsails/lspkind-nvim' }
   use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
-
   -- Autocomplete
   use { 'hrsh7th/nvim-cmp' }
   use { 'hrsh7th/cmp-nvim-lsp' }
   use { 'hrsh7th/cmp-buffer' }
-  use { 'hrsh7th/cmp-vsnip' }
-  use { 'hrsh7th/vim-vsnip' }
+  -- use { 'hrsh7th/cmp-vsnip' }
+  -- use { 'hrsh7th/vim-vsnip' }
+  use { 'L3MON4D3/LuaSnip' }
+  use { 'saadparwaiz1/cmp_luasnip' }
   use { 'hrsh7th/cmp-path' }
   use { 'hrsh7th/cmp-calc' }
   use { 'hrsh7th/cmp-cmdline' }
   use { 'ray-x/cmp-treesitter' }
   use { 'lukas-reineke/cmp-rg' }
   use { 'quangnguyen30192/cmp-nvim-tags' }
-  use { 'rafamadriz/friendly-snippets' }
+  use { 'rafamadriz/friendly-snippets', config= lua_path"friendly-snippets" }
   use { 'windwp/nvim-autopairs', config = lua_path"nvim-autopairs" } 
   use { 'andymass/vim-matchup' }
+  use {'ray-x/lsp_signature.nvim'}
 
   -- Treesitter
  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = lua_path"treesitter" }
  use { 'lukas-reineke/indent-blankline.nvim', config = lua_path"indent-blankline" }
  use { 'Yggdroot/indentLine', config = lua_path"indentLine" }
  use { 'SmiteshP/nvim-gps', config = lua_path"nvim-gps" }
+ use { 'RRethy/nvim-treesitter-endwise', config = lua_path"nvim-treesitter-endwise" }
 
   -- Syntax
   use { 'chrisbra/csv.vim' }
@@ -93,6 +96,10 @@ return require('packer').startup(function(use)
   -- Registers & clipboard
   use { 'dstein64/nvim-scrollview' }  
   use { 'fedepujol/move.nvim' }
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  })
 
   -- Tim Pope docet
   use { 'tpope/vim-rails' }
@@ -101,14 +108,13 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-bundler' }
   use { 'tpope/vim-capslock' }
   use { 'tpope/vim-repeat' }
-  use { 'tpope/vim-endwise' }
   use { 'tpope/vim-dispatch' }
   use { 'tpope/vim-dadbod' }
   use { 'tpope/vim-jdaddy' }
   use { 'tpope/vim-fugitive' }
   use { 'tpope/vim-commentary' }
   use { 'vim-ruby/vim-ruby' }
---  use { 'github/copilot.vim', config = lua_path"copilot" }
+  use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp', config=lua_path"cmp-tabnine"}
 
   -- Tmux
   use { 'christoomey/vim-tmux-navigator' }
@@ -132,4 +138,5 @@ return require('packer').startup(function(use)
   use { 'lambdalisue/suda.vim' }
  use { 'numtostr/FTerm.nvim', config = lua_path"fterm" }
  use { 'wfxr/minimap.vim', config = lua_path"minimap" }
+ use { 'anuvyklack/pretty-fold.nvim' }
 end)

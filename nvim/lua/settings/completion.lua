@@ -13,11 +13,28 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 local cmp = require'cmp'
 local lspkind = require'lspkind'
 local nvim_lsp = require'lspconfig'
+local luasnip = require("luasnip")
+
+require "lsp_signature".setup()
+require('pretty-fold').setup()
+
+local lspkind = require('lspkind')
+
+local source_mapping = {
+  buffer = "◉ Buffer",
+  nvim_lsp = "👐 LSP",
+  treesitter = "🌙 Treesitter",
+  cmp_tabnine = "💡 Tabnine",
+  path = "🚧 Path",
+  luasnip = "🌜 LuaSnip"
+}
+
+require("luasnip/loaders/from_vscode").load()
 
 cmp.setup({
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
+      require('luasnip').lsp_expand(args.body)
     end,
   },
   mapping = {
@@ -29,18 +46,22 @@ cmp.setup({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<CR>'] = cmp.mapping.confirm({ 
+      select = true
+      -- behavior = cmp.ConfirmBehavior.Replace,
+    }),
     ['<Up>'] = cmp.mapping.select_prev_item(),
     ['<Down>'] = cmp.mapping.select_next_item(),
-    -- ['<Tab>'] = cmp.mapping(function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_next_item()
-    --   elseif luasnip.expand_or_jumpable() then
-    --     luasnip.expand_or_jump()
-    --   else
-    --     fallback()
-    --   end
-    -- end, { 'i', 's' }),
+    -- ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
+    ['<Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
+      else
+        fallback()
+      end
+    end,
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -52,25 +73,27 @@ cmp.setup({
     end, { 'i', 's' }),
   },
   formatting = {
-    format = lspkind.cmp_format({
-      mode = 'symbol_text',
-      maxwidth = 50,
-
-      before = function (entry, vim_item)
-        return vim_item
+    format = function(entry, vim_item)
+      vim_item.kind = lspkind.presets.default[vim_item.kind]
+      local menu = source_mapping[entry.source.name]
+      if entry.source.name == 'cmp_tabnine' then
+        if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+          menu = entry.completion_item.data.detail .. ' ' .. menu
+        end
+        vim_item.kind = ''
       end
-    })
-  },
+      vim_item.menu = menu
+      return vim_item
+    end  },
   sources = cmp.config.sources({
+    { name = 'cmp_tabnine' },
     { name = 'nvim_lsp' },
-    { name = 'vsnip' },
+    { name = 'treesitter' },
+    { name = 'luasnip' },
     { name = 'path' },
     { name = 'calc' },
-    { name = 'treesitter' },
     { name = 'tags' },
     { name = 'rg' },
-  }, {
-    { name = 'buffer' },
   }),
 })
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).

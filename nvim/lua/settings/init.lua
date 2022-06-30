@@ -22,8 +22,9 @@ vim.opt.emoji = true
 vim.opt.history = 1000
 vim.opt.undofile = true
 vim.opt.undodir = "/tmp"
-vim.opt.foldlevel = 1
-vim.opt.foldmethod = 'syntax'
+-- vim.opt.foldlevel = 1
+-- vim.opt.foldmethod = 'indent'
+-- vim.opt.foldmethod = 'syntax'
 vim.opt.inccommand = 'nosplit'
 vim.opt.showtabline = 2
 vim.opt.smartcase = true
@@ -51,3 +52,10 @@ vim.cmd('syntax on')
 vim.cmd('set t_Co=256')
 vim.cmd('colorscheme codedark')
 vim.cmd('set background=light')
+vim.cmd([[
+    set foldmethod=indent   
+    set nofoldenable
+    set foldlevel=0
+    nnoremap <Space> zA
+]])
+

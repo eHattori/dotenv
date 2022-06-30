@@ -13,6 +13,7 @@
   resize_left = ""
   resize_right = ""
   new_window = ""
+  layout_launcher = <Alt>semicolon
 [profiles]
   [[default]]
     background_color = "#081b2a"
