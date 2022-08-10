@@ -16,10 +16,18 @@ vim.api.nvim_set_keymap('v', '<A-Up>', ":MoveBlock(-1)<CR>", { noremap = true, s
 vim.keymap.set('n', '<c-A-S-Down>', "yyp<Up><CR>", {noremap = true, silent = true})
 vim.keymap.set('n', '<c-A-S-Up>', "yyp<CR>", {noremap = true, silent = true})
 
+vim.keymap.set('v', '<c-A-S-Down>', "yyp<Up><CR>", {noremap = true, silent = true})
+vim.keymap.set('v', '<c-A-S-Up>', "yyp<CR>", {noremap = true, silent = true})
+
+
 ----------------- UTILS --------------------------
-vim.keymap.set('n', '<C-_>', ':Commentary<CR>', {noremap = true, silent = false})
-vim.keymap.set('v', '<C-_>', ':Commentary<CR>', {noremap = true, silent = false})
-vim.keymap.set('v', '<C-C>', ':w !xclip -i -sel c<CR>>', {noremap = true, silent = false})
+vim.keymap.set('n', '<C-/>', ':Commentary<CR>', {noremap = true, silent = false})
+vim.keymap.set('v', '<C-/>', ':Commentary<CR>', {noremap = true, silent = false})
+vim.keymap.set('v', '<C-C>', 'y<CR>', {noremap = true, silent = false})
+vim.keymap.set('v', '<C-x>', 'c<CR>', {noremap = true, silent = false})
+vim.keymap.set('n', '<C-v>', 'p<CR>', {noremap = true, silent = false})
+vim.keymap.set('v', '<C-v>', 'p<CR>', {noremap = true, silent = false})
+vim.keymap.set('i', '<C-v>', 'p<CR>', {noremap = true, silent = false})
 
 vim.keymap.set('n', '<c-z>', ':u<CR>', {noremap = true, silent = false})
 vim.keymap.set('i', '<c-z>', '<c-o>:u<CR>', {noremap = true, silent = false})
@@ -60,25 +68,38 @@ vim.cmd([[
 
 ---------------- Tab management -------------------------
 vim.cmd([[
-    noremap <A-l> :bnext<CR>
-    noremap <A-k> :bprev<CR>
-    noremap <A-w> :bdelete \| :bnext <CR>
+    noremap <C-S-j> :bnext<CR>
+    noremap <C-S-k> :bprev<CR>
+    noremap <c-w> :bdelete \| :bnext <CR>
     ]])
     
 ---------------- Terminal ------------------------------
--- vim.keymap.set('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>')
-vim.keymap.set('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
+vim.keymap.set('n', '<C-i>', '<CMD>lua require("FTerm").toggle()<CR>')
+vim.keymap.set('t', '<C-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 
 
 vim.cmd([[
-    noremap <A-i> :NERDTreeClose <CR> \| <CMD>lua require("FTerm").toggle()<CR>
+    noremap <C-i> :NERDTreeClose <CR> \| <CMD>lua require("FTerm").toggle()<CR>
 ]])
 
 
 ---------------- Trouble -----------------
-vim.keymap.set("n", "<A-x>", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "<A-f>", "<cmd>Trouble quickfix<cr>", {silent = true, noremap = true})
+vim.keymap.set("n", "<C-S-x>", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
+vim.keymap.set("n", "<C-.>", "<cmd>Trouble quickfix<cr>", {silent = true, noremap = true})
 
 ---------------- Markdown --------------------------------
 vim.keymap.set('n', '<F6>', ':MarkdownPreviewToggle<CR>', {noremap = true, silent = true})
+
+
+vim.cmd([[
+    tnoremap <A-h> <C-\><C-n><C-w>h
+    tnoremap <A-j> <C-\><C-n><C-w>j
+    tnoremap <A-k> <C-\><C-n><C-w>k
+    tnoremap <A-l> <C-\><C-n><C-w>l
+    nnoremap <A-h> <C-w>h
+    nnoremap <A-j> <C-w>j
+    nnoremap <A-k> <C-w>k
+    nnoremap <A-l> <C-w>l
+]])
+
 

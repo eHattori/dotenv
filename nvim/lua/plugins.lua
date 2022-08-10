@@ -82,8 +82,8 @@ return require('packer').startup(function(use)
    use { 'jistr/vim-nerdtree-tabs'}    
    
    -- Dashboard
-   use { 'glepnir/dashboard-nvim', config = lua_path"dashboard-nvim" }
-
+   use { 'applejwjcat/dashboard-nvim', config = lua_path"dashboard-nvim" }
+  use { 'mg979/vim-visual-multi'}
   -- Color
   use { 'crivotz/nvim-colorizer.lua', config = lua_path"colorizer" }
   use { 'folke/lsp-colors.nvim'}
