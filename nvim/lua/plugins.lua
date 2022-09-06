@@ -29,7 +29,7 @@ return require('packer').startup(function(use)
   -- LSP
   use { 'neovim/nvim-lspconfig' }
   use { 'onsails/lspkind-nvim' }
-  use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
+  -- use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
   -- Autocomplete
   use { 'hrsh7th/nvim-cmp' }
   use { 'hrsh7th/cmp-nvim-lsp' }
@@ -47,7 +47,8 @@ return require('packer').startup(function(use)
   use { 'rafamadriz/friendly-snippets', config= lua_path"friendly-snippets" }
   use { 'windwp/nvim-autopairs', config = lua_path"nvim-autopairs" } 
   use { 'andymass/vim-matchup' }
-  use {'ray-x/lsp_signature.nvim'}
+  use { 'windwp/nvim-ts-autotag', config = lua_path"vim-closetag"}
+  -- use {'ray-x/lsp_signature.nvim'}
 
   -- Treesitter
  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = lua_path"treesitter" }
@@ -59,6 +60,8 @@ return require('packer').startup(function(use)
   -- Syntax
   use { 'chrisbra/csv.vim' }
   use { 'junegunn/vim-easy-align' }  
+  use { 'vim-autoformat/vim-autoformat', config = lua_path"autoformat" }  
+  -- use { 'prettier/vim-prettier', config = lua_path"prettier" }  
   use { 'mhartington/formatter.nvim', config = lua_path"formatter-nvim" }  
 
   -- Icons
@@ -67,7 +70,7 @@ return require('packer').startup(function(use)
   use { 'kyazdani42/nvim-web-devicons' }
 
   -- Vim Airline
-  use { 'vim-airline/vim-airline', config = lua_path"vim-airline" }
+  -- use { 'vim-airline/vim-airline', config = lua_path"vim-airline" }
   use { 'vim-airline/vim-airline-themes' }
 
    -- Telescope  
@@ -83,6 +86,8 @@ return require('packer').startup(function(use)
    
    -- Dashboard
    use { 'glepnir/dashboard-nvim', config = lua_path"dashboard-nvim" }
+   use { 'mg979/vim-visual-multi'}
+   -- use { 'haya14busa/vim-asterisk' }
 
   -- Color
   use { 'crivotz/nvim-colorizer.lua', config = lua_path"colorizer" }
@@ -120,7 +125,7 @@ return require('packer').startup(function(use)
   use { 'christoomey/vim-tmux-navigator' }
 
   -- Folkes
-   use { 'folke/trouble.nvim' }
+   use { 'folke/trouble.nvim', config=lua_path"trouble" }
 
   -- Colorschema
   use { 'arcticicestudio/nord-vim' }

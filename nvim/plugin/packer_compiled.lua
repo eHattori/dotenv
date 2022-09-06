@@ -182,11 +182,6 @@ _G.packer_plugins = {
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/lsp-colors.nvim",
     url = "https://github.com/folke/lsp-colors.nvim"
   },
-  ["lsp_signature.nvim"] = {
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
-    url = "https://github.com/ray-x/lsp_signature.nvim"
-  },
   ["lspkind-nvim"] = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
@@ -235,14 +230,6 @@ _G.packer_plugins = {
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
-  ["nvim-code-action-menu"] = {
-    commands = { "CodeActionMenu" },
-    loaded = false,
-    needs_bufread = true,
-    only_cond = false,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/opt/nvim-code-action-menu",
-    url = "https://github.com/weilbith/nvim-code-action-menu"
-  },
   ["nvim-colorizer.lua"] = {
     config = { "require'plugins.colorizer'" },
     loaded = true,
@@ -283,6 +270,12 @@ _G.packer_plugins = {
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nvim-treesitter-endwise",
     url = "https://github.com/RRethy/nvim-treesitter-endwise"
   },
+  ["nvim-ts-autotag"] = {
+    config = { "require'plugins.vim-closetag'" },
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
+    url = "https://github.com/windwp/nvim-ts-autotag"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
@@ -320,6 +313,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["trouble.nvim"] = {
+    config = { "require'plugins.trouble'" },
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
@@ -329,16 +323,16 @@ _G.packer_plugins = {
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-abolish",
     url = "https://github.com/tpope/vim-abolish"
   },
-  ["vim-airline"] = {
-    config = { "require'plugins.vim-airline'" },
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-airline",
-    url = "https://github.com/vim-airline/vim-airline"
-  },
   ["vim-airline-themes"] = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-airline-themes",
     url = "https://github.com/vim-airline/vim-airline-themes"
+  },
+  ["vim-autoformat"] = {
+    config = { "require'plugins.autoformat'" },
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-autoformat",
+    url = "https://github.com/vim-autoformat/vim-autoformat"
   },
   ["vim-bundler"] = {
     loaded = true,
@@ -440,6 +434,11 @@ _G.packer_plugins = {
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
     url = "https://github.com/christoomey/vim-tmux-navigator"
   },
+  ["vim-visual-multi"] = {
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
+    url = "https://github.com/mg979/vim-visual-multi"
+  },
   ["vim-webdevicons"] = {
     config = { "require'plugins.web-devicons'" },
     loaded = true,
@@ -449,88 +448,90 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: octo.nvim
-time([[Config for octo.nvim]], true)
-require'plugins.octo'
-time([[Config for octo.nvim]], false)
--- Config for: minimap.vim
-time([[Config for minimap.vim]], true)
-require'plugins.minimap'
-time([[Config for minimap.vim]], false)
+-- Config for: trouble.nvim
+time([[Config for trouble.nvim]], true)
+require'plugins.trouble'
+time([[Config for trouble.nvim]], false)
 -- Config for: blamer.nvim
 time([[Config for blamer.nvim]], true)
 require'plugins.blamer'
 time([[Config for blamer.nvim]], false)
--- Config for: nvim-notify
-time([[Config for nvim-notify]], true)
-require'plugins.nvim-notify'
-time([[Config for nvim-notify]], false)
--- Config for: dashboard-nvim
-time([[Config for dashboard-nvim]], true)
-require'plugins.dashboard-nvim'
-time([[Config for dashboard-nvim]], false)
--- Config for: nerdtree
-time([[Config for nerdtree]], true)
-require'plugins.nerdtree'
-time([[Config for nerdtree]], false)
--- Config for: formatter.nvim
-time([[Config for formatter.nvim]], true)
-require'plugins.formatter-nvim'
-time([[Config for formatter.nvim]], false)
--- Config for: friendly-snippets
-time([[Config for friendly-snippets]], true)
-require'plugins.friendly-snippets'
-time([[Config for friendly-snippets]], false)
--- Config for: indent-blankline.nvim
-time([[Config for indent-blankline.nvim]], true)
-require'plugins.indent-blankline'
-time([[Config for indent-blankline.nvim]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-require'plugins.nvim-autopairs'
-time([[Config for nvim-autopairs]], false)
--- Config for: indentLine
-time([[Config for indentLine]], true)
-require'plugins.indentLine'
-time([[Config for indentLine]], false)
--- Config for: vim-airline
-time([[Config for vim-airline]], true)
-require'plugins.vim-airline'
-time([[Config for vim-airline]], false)
--- Config for: vim-webdevicons
-time([[Config for vim-webdevicons]], true)
-require'plugins.web-devicons'
-time([[Config for vim-webdevicons]], false)
--- Config for: cmp-tabnine
-time([[Config for cmp-tabnine]], true)
-require'plugins.cmp-tabnine'
-time([[Config for cmp-tabnine]], false)
--- Config for: nvim-colorizer.lua
-time([[Config for nvim-colorizer.lua]], true)
-require'plugins.colorizer'
-time([[Config for nvim-colorizer.lua]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-require'plugins.treesitter'
-time([[Config for nvim-treesitter]], false)
--- Config for: nvim-treesitter-endwise
-time([[Config for nvim-treesitter-endwise]], true)
-require'plugins.nvim-treesitter-endwise'
-time([[Config for nvim-treesitter-endwise]], false)
 -- Config for: nvim-gps
 time([[Config for nvim-gps]], true)
 require'plugins.nvim-gps'
 time([[Config for nvim-gps]], false)
+-- Config for: dashboard-nvim
+time([[Config for dashboard-nvim]], true)
+require'plugins.dashboard-nvim'
+time([[Config for dashboard-nvim]], false)
+-- Config for: minimap.vim
+time([[Config for minimap.vim]], true)
+require'plugins.minimap'
+time([[Config for minimap.vim]], false)
+-- Config for: nvim-notify
+time([[Config for nvim-notify]], true)
+require'plugins.nvim-notify'
+time([[Config for nvim-notify]], false)
+-- Config for: vim-autoformat
+time([[Config for vim-autoformat]], true)
+require'plugins.autoformat'
+time([[Config for vim-autoformat]], false)
+-- Config for: nerdtree
+time([[Config for nerdtree]], true)
+require'plugins.nerdtree'
+time([[Config for nerdtree]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+require'plugins.treesitter'
+time([[Config for nvim-treesitter]], false)
+-- Config for: formatter.nvim
+time([[Config for formatter.nvim]], true)
+require'plugins.formatter-nvim'
+time([[Config for formatter.nvim]], false)
+-- Config for: nvim-colorizer.lua
+time([[Config for nvim-colorizer.lua]], true)
+require'plugins.colorizer'
+time([[Config for nvim-colorizer.lua]], false)
+-- Config for: indentLine
+time([[Config for indentLine]], true)
+require'plugins.indentLine'
+time([[Config for indentLine]], false)
+-- Config for: nvim-ts-autotag
+time([[Config for nvim-ts-autotag]], true)
+require'plugins.vim-closetag'
+time([[Config for nvim-ts-autotag]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+require'plugins.nvim-autopairs'
+time([[Config for nvim-autopairs]], false)
+-- Config for: indent-blankline.nvim
+time([[Config for indent-blankline.nvim]], true)
+require'plugins.indent-blankline'
+time([[Config for indent-blankline.nvim]], false)
 -- Config for: FTerm.nvim
 time([[Config for FTerm.nvim]], true)
 require'plugins.fterm'
 time([[Config for FTerm.nvim]], false)
-
--- Command lazy-loads
-time([[Defining lazy-load commands]], true)
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file CodeActionMenu lua require("packer.load")({'nvim-code-action-menu'}, { cmd = "CodeActionMenu", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
-time([[Defining lazy-load commands]], false)
-
+-- Config for: cmp-tabnine
+time([[Config for cmp-tabnine]], true)
+require'plugins.cmp-tabnine'
+time([[Config for cmp-tabnine]], false)
+-- Config for: friendly-snippets
+time([[Config for friendly-snippets]], true)
+require'plugins.friendly-snippets'
+time([[Config for friendly-snippets]], false)
+-- Config for: octo.nvim
+time([[Config for octo.nvim]], true)
+require'plugins.octo'
+time([[Config for octo.nvim]], false)
+-- Config for: vim-webdevicons
+time([[Config for vim-webdevicons]], true)
+require'plugins.web-devicons'
+time([[Config for vim-webdevicons]], false)
+-- Config for: nvim-treesitter-endwise
+time([[Config for nvim-treesitter-endwise]], true)
+require'plugins.nvim-treesitter-endwise'
+time([[Config for nvim-treesitter-endwise]], false)
 if should_profile then save_profiles() end
 
 end)

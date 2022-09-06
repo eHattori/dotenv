@@ -8,19 +8,20 @@
   cycle_prev = ""
   go_up = ""
   go_down = ""
-  go_left = <Primary><Shift>Left
-  go_right = <Primary><Shift>Right
+  go_left = ""
+  go_right = ""
   resize_left = ""
   resize_right = ""
   new_window = ""
   layout_launcher = <Alt>semicolon
 [profiles]
   [[default]]
+    allow_bold = False
     background_color = "#081b2a"
     background_darkness = 0.94
     background_type = transparent
     cursor_color = "#aaaaaa"
-    font = MesloLGS NF Bold 9
+    font = MesloLGS NF 10
     show_titlebar = False
     login_shell = True
     use_system_font = False

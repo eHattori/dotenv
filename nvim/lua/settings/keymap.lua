@@ -1,7 +1,8 @@
 ----------------- MOVE LINE UP/DOWN AND DUPPLICATE -------------
 vim.cmd([[
-    noremap <c-p> :NERDTreeClose \| :Telescope find_files <CR>
+    noremap <c-p> :NERDTreeClose \| :Telescope find_files hidden=true<CR>
     noremap <c-f> :NERDTreeClose \| :Telescope live_grep <CR>
+    noremap <c-]> :NERDTreeClose \| :Telescope buffers <CR>
 ]])
 
 vim.keymap.set('n', '<F12>', ':Telescope lsp_definitions<CR>', {noremap = true, silent = true})
@@ -15,7 +16,9 @@ vim.api.nvim_set_keymap('v', '<A-Up>', ":MoveBlock(-1)<CR>", { noremap = true, s
 
 vim.keymap.set('n', '<c-A-S-Down>', "yyp<Up><CR>", {noremap = true, silent = true})
 vim.keymap.set('n', '<c-A-S-Up>', "yyp<CR>", {noremap = true, silent = true})
-
+vim.keymap.set('v', '<c-A-S-Down>', "YP<Up><CR>", {noremap = true, silent = true})
+vim.keymap.set('v', '<c-A-S-Up>', "YP<Down><CR>", {noremap = true, silent = true})
+vim.keymap.set('v', '<c-A-S-Up>', "YP<Up><CR>", {noremap = true, silent = true})
 ----------------- UTILS --------------------------
 vim.keymap.set('n', '<C-_>', ':Commentary<CR>', {noremap = true, silent = false})
 vim.keymap.set('v', '<C-_>', ':Commentary<CR>', {noremap = true, silent = false})
@@ -24,9 +27,18 @@ vim.keymap.set('v', '<C-C>', ':w !xclip -i -sel c<CR>>', {noremap = true, silent
 vim.keymap.set('n', '<c-z>', ':u<CR>', {noremap = true, silent = false})
 vim.keymap.set('i', '<c-z>', '<c-o>:u<CR>', {noremap = true, silent = false})
 
+vim.keymap.set('n', '<c-y>', '<C-R><CR>', {noremap = true, silent = false})
+vim.keymap.set('i', '<c-y>', '<c-o><C-R><CR>', {noremap = true, silent = false})
 
-vim.keymap.set('n', '<F3>', ':lua vim.lsp.buf.formatting()<CR>', {noremap = true, silent = true})
-vim.keymap.set('n', '<c-s>', ':w<CR>', {noremap = true, silent = false})
+vim.keymap.set('v', '<C-x>', 'c<CR>', {noremap = true, silent = false})
+-- vim.keymap.set('n', '<C-v>', 'p<CR>', {noremap = true, silent = false})
+-- vim.keymap.set('v', '<C-v>', 'p<CR>', {noremap = true, silent = false})
+-- vim.keymap.set('i', '<C-v>', 'p<CR>', {noremap = true, silent = false})
+
+vim.keymap.set('n', '<F3>', ':Autoformat<CR>', {noremap = true })
+vim.keymap.set('n', '<c-s>', ':update<CR>', {noremap = true, silent = false})
+vim.keymap.set('v', '<c-s>', '<C-C>:update<CR>', {noremap = true, silent = false})
+vim.keymap.set('i', '<c-s>', '<Esc>:update<CR>gi', {noremap = true, silent = false})
 vim.keymap.set('n', '<c-q>', ':q<CR>', {noremap = true, silent = false})
 
 ----------------- NERDTREE --------------------------
@@ -34,9 +46,14 @@ vim.keymap.set('n', '<C-b>', ':NERDTreeTabsToggle<CR>', {noremap = true, silent 
 
 ----------------- SHIFT ARROW SELECTION --------------------------
 vim.cmd([[
+
+    nnoremap <silent> <A-d> :let @/=expand('<cword>')<cr>cgn
     nmap <S-Up> v<Up>
     nmap <S-End> vg$<Right>
+    nmap <S-Home> v<Home>
     nmap <S-Down> v<Down>
+    imap <S-Left> v<Left>
+    imap <S-Right> v<Right>
     nmap <S-Left> v<Left>
     nmap <S-Right> v<Right>
     vmap <S-Up> <Up>
@@ -47,8 +64,19 @@ vim.cmd([[
     imap <S-Down> <Esc>v<Down>
     imap <S-Left> <Esc>v<Left>
     imap <S-Right> <Esc>v<Right>
-]])
 
+    noremap <C-A> gggH<C-O>G
+    inoremap <C-A> <C-O>gg<C-O>gH<C-O>G
+    cnoremap <C-A> <C-C>gggH<C-O>G
+    onoremap <C-A> <C-C>gggH<C-O>G
+    snoremap <C-A> <C-C>gggH<C-O>G
+    xnoremap <C-A> <C-C>ggVG
+
+    noremap <C-S-Right> ve
+    inoremap <C-S-Right> <Esc><Right>ve
+    vnoremap <C-S-Right> e
+
+]])
 ---------------- Resize splits with arrow keys -------------
 vim.cmd([[
     noremap 1<up> :res +5<CR>
@@ -63,21 +91,25 @@ vim.cmd([[
     noremap <A-l> :bnext<CR>
     noremap <A-k> :bprev<CR>
     noremap <A-w> :bdelete \| :bnext <CR>
-    ]])
+ ]])
     
 ---------------- Terminal ------------------------------
--- vim.keymap.set('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>')
 vim.keymap.set('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 
-
 vim.cmd([[
-    noremap <A-i> :NERDTreeClose <CR> \| <CMD>lua require("FTerm").toggle()<CR>
+    nnoremap <silent> <A-i> :NERDTreeClose <CR> \| <CMD>lua require("FTerm").toggle()<CR>
+    noremap  V <A-i> :NERDTreeClose <CR> \| <CMD>lua require("FTerm").toggle()<CR>
+    inoremap <silent> <A-i> :NERDTreeClose <CR> \| <CMD>lua require("FTerm").toggle()<CR>
 ]])
 
 
 ---------------- Trouble -----------------
-vim.keymap.set("n", "<A-x>", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "<A-f>", "<cmd>Trouble quickfix<cr>", {silent = true, noremap = true})
+vim.cmd([[
+    nnoremap <silent> <A-x> :NERDTreeClose <CR> \| <cmd>TroubleToggle<cr>
+    nnoremap <silent> <A-.> :NERDTreeClose <CR> \| <cmd>TroubleToggle quickfix<cr>
+
+   let g:VM_default_mappings = 0
+]])
 
 ---------------- Markdown --------------------------------
 vim.keymap.set('n', '<F6>', ':MarkdownPreviewToggle<CR>', {noremap = true, silent = true})

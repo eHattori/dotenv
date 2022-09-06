@@ -9,7 +9,10 @@ vim.cmd([[
     " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
     autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
           \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-    
+
+
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+          
     let g:nerdtree_tabs_open_on_gui_startup=2
     let g:nerdtree_tabs_open_on_console_startup=2
     let g:nerdtree_tabs_autofind=1
