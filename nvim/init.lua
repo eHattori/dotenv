@@ -3,7 +3,6 @@ require('plugins')
 require('settings')
 require('settings.color')
 require('settings.completion')
--- lsp
-require('lsp')
+require('settings.dap')
 -- Keymap
 require('settings.keymap')
