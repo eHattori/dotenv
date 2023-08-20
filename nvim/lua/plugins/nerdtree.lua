@@ -28,5 +28,8 @@ vim.cmd([[
     let NERDTreeIgnore=['\.git$', '\.idea$', '\.vscode$', '\.history$']
     let NERDTreeMinimalUI=1
     let g:NERDTreeWinPos = "left"
-    let g:webdevicons_enable_nerdtree = 1    
+    let g:webdevicons_enable_nerdtree = 1
+    hi Directory guifg=#FFF ctermfg=white
+    hi File guifg=#FFF ctermfg=white
 ]])
+
