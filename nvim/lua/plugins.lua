@@ -29,6 +29,8 @@ return require('packer').startup(function(use)
   -- LSP
   use { 'neovim/nvim-lspconfig' }
   use { 'onsails/lspkind-nvim' }
+  use { 'RRethy/vim-illuminate' }
+  use { 'Bekaboo/dropbar.nvim'}
 
   -- Autocomplete
   use { 'hrsh7th/nvim-cmp' }
@@ -110,7 +112,7 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-jdaddy' }
   use { 'tpope/vim-fugitive' }
   use { 'tpope/vim-commentary' }
-  use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp', config=lua_path"cmp-tabnine"}
+  -- use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp', config=lua_path"cmp-tabnine"}
 
   -- Tmux
   use { 'christoomey/vim-tmux-navigator' }
