@@ -30,7 +30,7 @@ return require('packer').startup(function(use)
   use { 'neovim/nvim-lspconfig' }
   use { 'onsails/lspkind-nvim' }
   use { 'RRethy/vim-illuminate' }
-  use { 'Bekaboo/dropbar.nvim'}
+  use { 'm-demare/hlargs.nvim' }
 
   -- Autocomplete
   use { 'hrsh7th/nvim-cmp' }
@@ -38,16 +38,16 @@ return require('packer').startup(function(use)
   use { 'hrsh7th/cmp-buffer' }
   use { 'L3MON4D3/LuaSnip' }
   use { 'saadparwaiz1/cmp_luasnip' }
-  use { 'hrsh7th/cmp-path' }
-  use { 'hrsh7th/cmp-calc' }
+  -- use { 'hrsh7th/cmp-path' }
+  -- use { 'hrsh7th/cmp-calc' }
   use { 'hrsh7th/cmp-cmdline' }
-  use { 'ray-x/cmp-treesitter' }
+  -- use { 'ray-x/cmp-treesitter' }
   use { 'lukas-reineke/cmp-rg' }
-  use { 'quangnguyen30192/cmp-nvim-tags' }
+  -- use { 'quangnguyen30192/cmp-nvim-tags' }
   use { 'rafamadriz/friendly-snippets', config= lua_path"friendly-snippets" }
   use { 'windwp/nvim-autopairs', config = lua_path"nvim-autopairs" }
-  use { 'andymass/vim-matchup' }
-  use { 'windwp/nvim-ts-autotag', config = lua_path"vim-closetag"}
+  -- use { 'andymass/vim-matchup' }
+  -- use { 'windwp/nvim-ts-autotag', config = lua_path"vim-closetag"}
   use {'ray-x/lsp_signature.nvim'}
 
   -- Treesitter
@@ -55,6 +55,7 @@ return require('packer').startup(function(use)
   use { 'lukas-reineke/indent-blankline.nvim', config = lua_path"indent-blankline" }
   use { 'Yggdroot/indentLine', config = lua_path"indentLine" }
   use { 'SmiteshP/nvim-gps', config = lua_path"nvim-gps" }
+  use { 'HiPhish/nvim-ts-rainbow2' }
   use { 'RRethy/nvim-treesitter-endwise', config = lua_path"nvim-treesitter-endwise" }
 
   -- Syntax
@@ -73,16 +74,31 @@ return require('packer').startup(function(use)
   use { 'vim-airline/vim-airline-themes' }
 
   -- Explorer
-  use {
-    'nvim-tree/nvim-tree.lua',
-    requires = {
-      'nvim-tree/nvim-web-devicons', -- optional
-    },
-    config = lua_path"nvim-tree"
-  }
+  -- use {
+  --   'nvim-tree/nvim-tree.lua',
+  --   requires = {
+  --   'nvim-tree/nvim-web-devicons', -- optional
+  --   },
+  --   config = lua_path"nvim-tree"
+  -- }
+  use { "nvim-neo-tree/neo-tree.nvim",
+        requires = {
+      --   'nvim-tree/nvim-web-devicons', -- optional
+        "MunifTanjim/nui.nvim",
+        "nvim-lua/plenary.nvim",
+        "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+        },
+        config = lua_path"neotree"
+}
 
-  -- Dashboard
+  -- Multicursors
   use { 'mg979/vim-visual-multi'}
+  -- use {'smoka7/multicursors.nvim',
+  --   requires = {
+  --     'smoka7/hydra.nvim',
+  --   },
+  --   config = lua_path"multicursors"
+  -- }
 
   -- Color
   use { 'crivotz/nvim-colorizer.lua', config = lua_path"colorizer" }
@@ -119,6 +135,7 @@ return require('packer').startup(function(use)
 
   -- Colorschema
   use { 'dracula/vim', as = 'dracula' }
+  use { "catppuccin/nvim", as = "catppuccin" }
 
   -- Debug
   use {
@@ -131,6 +148,7 @@ return require('packer').startup(function(use)
       'rcarriga/nvim-dap-ui',
       'nvim-treesitter/nvim-treesitter',
       'theHamsta/nvim-dap-virtual-text',
+      'nvim-telescope/telescope-dap.nvim',
       'mxsdev/nvim-dap-vscode-js',
     }
   }
@@ -144,8 +162,11 @@ return require('packer').startup(function(use)
   use { 'pwntester/octo.nvim', config = lua_path"octo" }
 
   -- General Plugins
+  use { 'Bekaboo/dropbar.nvim'}
+  use { 'folke/edgy.nvim', config = lua_path"edgy" }
   use { 'rcarriga/nvim-notify', config = lua_path"nvim-notify" }
-  use { 'numtostr/FTerm.nvim', config = lua_path"fterm" }
+  use {"akinsho/toggleterm.nvim", tag = '*', config = lua_path"toggleterm" }
+  -- use { 'numtostr/FTerm.nvim', config = lua_path"fterm" }
   use { 'anuvyklack/pretty-fold.nvim' }
   use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons', config=lua_path"bufferline"}
 
