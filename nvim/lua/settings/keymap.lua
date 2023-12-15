@@ -1,8 +1,8 @@
 ----------------- MOVE LINE UP/DOWN AND DUPPLICATE -------------
 vim.cmd([[
-    noremap <c-p> :NERDTreeClose \| :Telescope find_files hidden=true<CR>
-    noremap <c-f> :NERDTreeClose \| :Telescope live_grep <CR>
-    noremap <c-]> :NERDTreeClose \| :Telescope buffers <CR>
+    noremap <c-p> :Telescope find_files hidden=true<CR>
+    noremap <c-f> :Telescope live_grep <CR>
+    noremap <c-]> :Telescope buffers <CR>
 ]])
 
 vim.keymap.set('n', '<F12>', ':Telescope lsp_definitions<CR>', {noremap = true, silent = true})
@@ -35,14 +35,17 @@ vim.keymap.set('v', '<C-x>', 'c<CR>', {noremap = true, silent = false})
 -- vim.keymap.set('v', '<C-v>', 'p<CR>', {noremap = true, silent = false})
 -- vim.keymap.set('i', '<C-v>', 'p<CR>', {noremap = true, silent = false})
 
-vim.keymap.set('n', '<F3>', ':Autoformat<CR>', {noremap = true })
+-- vim.keymap.set('n', '<F3>', ':Autoformat<CR>', {noremap = true })
+-- vim.keymap.set('n', '<C-i>', ':Autoformat<CR>', {noremap = true })
+vim.keymap.set('n', '<C-i>', ':lua vim.lsp.buf.format()<CR>', {noremap = true })
 vim.keymap.set('n', '<c-s>', ':update<CR>', {noremap = true, silent = false})
 vim.keymap.set('v', '<c-s>', '<C-C>:update<CR>', {noremap = true, silent = false})
 vim.keymap.set('i', '<c-s>', '<Esc>:update<CR>gi', {noremap = true, silent = false})
 vim.keymap.set('n', '<c-q>', ':q<CR>', {noremap = true, silent = false})
 
 ----------------- NERDTREE --------------------------
-vim.keymap.set('n', '<C-b>', ':NERDTreeTabsToggle<CR>', {noremap = true, silent = false})
+-- vim.keymap.set('n', '<C-b>', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
+vim.keymap.set('n', '<C-b>', ':Neotree toggle<CR>', {noremap = true, silent = true})
 
 ----------------- SHIFT ARROW SELECTION --------------------------
 vim.cmd([[
@@ -88,29 +91,37 @@ vim.cmd([[
 
 ---------------- Tab management -------------------------
 vim.cmd([[
-    noremap <A-l> :bnext<CR>
-    noremap <A-k> :bprev<CR>
-    noremap <A-w> :bdelete \| :bnext <CR>
+    noremap <C-PageUp> :bp<CR>
+    noremap <C-PageDown> :bn<CR>
+    noremap <C-w> :bw<CR>
  ]])
     
 ---------------- Terminal ------------------------------
-vim.keymap.set('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
+-- vim.keymap.set('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 
-vim.cmd([[
-    nnoremap <silent> <A-i> :NERDTreeClose <CR> \| <CMD>lua require("FTerm").toggle()<CR>
-    noremap  V <A-i> :NERDTreeClose <CR> \| <CMD>lua require("FTerm").toggle()<CR>
-    inoremap <silent> <A-i> :NERDTreeClose <CR> \| <CMD>lua require("FTerm").toggle()<CR>
-]])
+-- vim.cmd([[
+--     nnoremap <silent> <A-i> <CMD>lua require("FTerm").toggle()<CR>
+--     noremap  V <A-i> <CMD>lua require("FTerm").toggle()<CR>
+--     inoremap <silent> <A-i><CMD>lua require("FTerm").toggle()<CR>
+-- ]])
+vim.keymap.set('n', '<A-i>', ':ToggleTerm<CR>', {noremap = true })
 
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 ---------------- Trouble -----------------
 vim.cmd([[
-    nnoremap <silent> <A-x> :NERDTreeClose <CR> \| <cmd>TroubleToggle<cr>
-    nnoremap <silent> <A-.> :NERDTreeClose <CR> \| <cmd>TroubleToggle quickfix<cr>
+    nnoremap <silent> <A-x> <cmd>TroubleToggle<cr>
+    nnoremap <silent> <A-.> <cmd>TroubleToggle quickfix<cr>
 
    let g:VM_default_mappings = 0
 ]])
 
 ---------------- Markdown --------------------------------
 vim.keymap.set('n', '<F6>', ':MarkdownPreviewToggle<CR>', {noremap = true, silent = true})
-
+vim.keymap.set('n', '<c-k>', 'lua vim.lsp.buf.signature_help()<CR>', {noremap = true, silent = true})

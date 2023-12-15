@@ -19,3 +19,13 @@
 [pretty]
     pretty-history = format:%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
 
+[safe]
+	directory = /media/hattori/ACBE79ABBE796EA8/workspace/finder-workspace/waluigi
+	directory = /media/hattori/ACBE79ABBE796EA8/workspace/finder-workspace/docker-images
+	directory = /media/hattori/ACBE79ABBE796EA8/workspace/boti-workspace/vd-vdi-core-root-config
+	directory = /media/hattori/ACBE79ABBE796EA8/workspace/boti-workspace/vd-vdi-core-chatbot
+	directory = /media/hattori/ACBE79ABBE796EA8/workspace/boti-workspace/poc
+	directory = /media/hattori/ACBE79ABBE796EA8/workspace/finder-workspace/link
+	directory = /media/hattori/ACBE79ABBE796EA8/workspace/finder-workspace/plex/media-center
+	directory = /media/hattori/ACBE79ABBE796EA8/workspace/boti-workspace/vd-vdi-core-auth-service
+	directory = /media/hattori/ACBE79ABBE796EA8/workspace/boti-workspace/vd-vdi-core-users

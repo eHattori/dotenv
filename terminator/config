@@ -12,21 +12,23 @@
   go_right = ""
   resize_left = ""
   resize_right = ""
+  full_screen = <Shift>F3
   new_window = ""
   layout_launcher = <Alt>semicolon
 [profiles]
   [[default]]
-    allow_bold = False
     background_color = "#081b2a"
-    background_darkness = 0.94
+    background_darkness = 0.8
     background_type = transparent
     cursor_color = "#aaaaaa"
-    font = MesloLGS NF 10
+    font = DroidSansM Nerd Font Bold 10
     show_titlebar = False
+    scrollback_lines = 50000
     login_shell = True
     use_system_font = False
     use_theme_colors = True
     bold_is_bright = True
+    copy_on_selection = True
 [layouts]
   [[default]]
     [[[window0]]]

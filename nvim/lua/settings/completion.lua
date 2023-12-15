@@ -194,6 +194,7 @@ end
     'bashls',
     'cssls',
     'pyright',
+    -- 'typescriptreact',
     -- 'solargraph',
     'html',
     'dockerls',

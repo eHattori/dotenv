@@ -9,23 +9,26 @@ vim.api.nvim_command('packadd packer.nvim')
 
 local no_errors, error_msg = pcall(function()
 
-  local time
-  local profile_info
-  local should_profile = false
-  if should_profile then
-    local hrtime = vim.loop.hrtime
-    profile_info = {}
-    time = function(chunk, start)
-      if start then
-        profile_info[chunk] = hrtime()
-      else
-        profile_info[chunk] = (hrtime() - profile_info[chunk]) / 1e6
-      end
+_G._packer = _G._packer or {}
+_G._packer.inside_compile = true
+
+local time
+local profile_info
+local should_profile = false
+if should_profile then
+  local hrtime = vim.loop.hrtime
+  profile_info = {}
+  time = function(chunk, start)
+    if start then
+      profile_info[chunk] = hrtime()
+    else
+      profile_info[chunk] = (hrtime() - profile_info[chunk]) / 1e6
     end
-  else
-    time = function(chunk, start) end
   end
-  
+else
+  time = function(chunk, start) end
+end
+
 local function save_profiles(threshold)
   local sorted_times = {}
   for chunk_name, time_taken in pairs(profile_info) do
@@ -38,14 +41,16 @@ local function save_profiles(threshold)
       results[i] = elem[1] .. ' took ' .. elem[2] .. 'ms'
     end
   end
+  if threshold then
+    table.insert(results, '(Only showing plugins that took longer than ' .. threshold .. ' ms ' .. 'to load)')
+  end
 
-  _G._packer = _G._packer or {}
   _G._packer.profile_output = results
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/hattori/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/hattori/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/hattori/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/hattori/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/hattori/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/home/hattori/.cache/nvim/packer_hererocks/2.1.1693350652/share/lua/5.1/?.lua;/home/hattori/.cache/nvim/packer_hererocks/2.1.1693350652/share/lua/5.1/?/init.lua;/home/hattori/.cache/nvim/packer_hererocks/2.1.1693350652/lib/luarocks/rocks-5.1/?.lua;/home/hattori/.cache/nvim/packer_hererocks/2.1.1693350652/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/hattori/.cache/nvim/packer_hererocks/2.1.1693350652/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -69,21 +74,10 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["FTerm.nvim"] = {
-    config = { "require'plugins.fterm'" },
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/FTerm.nvim",
-    url = "https://github.com/numtostr/FTerm.nvim"
-  },
   LuaSnip = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
-  },
-  ["awesome-vim-colorschemes"] = {
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/awesome-vim-colorschemes",
-    url = "https://github.com/rafi/awesome-vim-colorschemes"
   },
   ["blamer.nvim"] = {
     config = { "require'plugins.blamer'" },
@@ -91,15 +85,21 @@ _G.packer_plugins = {
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/blamer.nvim",
     url = "https://github.com/APZelos/blamer.nvim"
   },
+  ["bufferline.nvim"] = {
+    config = { "require'plugins.bufferline'" },
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
+    url = "https://github.com/akinsho/bufferline.nvim"
+  },
+  catppuccin = {
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/catppuccin",
+    url = "https://github.com/catppuccin/nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
-  },
-  ["cmp-calc"] = {
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/cmp-calc",
-    url = "https://github.com/hrsh7th/cmp-calc"
   },
   ["cmp-cmdline"] = {
     loaded = true,
@@ -111,31 +111,10 @@ _G.packer_plugins = {
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
-  ["cmp-nvim-tags"] = {
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/cmp-nvim-tags",
-    url = "https://github.com/quangnguyen30192/cmp-nvim-tags"
-  },
-  ["cmp-path"] = {
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/cmp-path",
-    url = "https://github.com/hrsh7th/cmp-path"
-  },
   ["cmp-rg"] = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/cmp-rg",
     url = "https://github.com/lukas-reineke/cmp-rg"
-  },
-  ["cmp-tabnine"] = {
-    config = { "require'plugins.cmp-tabnine'" },
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/cmp-tabnine",
-    url = "https://github.com/tzachar/cmp-tabnine"
-  },
-  ["cmp-treesitter"] = {
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/cmp-treesitter",
-    url = "https://github.com/ray-x/cmp-treesitter"
   },
   cmp_luasnip = {
     loaded = true,
@@ -147,11 +126,21 @@ _G.packer_plugins = {
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/csv.vim",
     url = "https://github.com/chrisbra/csv.vim"
   },
-  ["dashboard-nvim"] = {
-    config = { "require'plugins.dashboard-nvim'" },
+  dracula = {
     loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/dashboard-nvim",
-    url = "https://github.com/glepnir/dashboard-nvim"
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/dracula",
+    url = "https://github.com/dracula/vim"
+  },
+  ["dropbar.nvim"] = {
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/dropbar.nvim",
+    url = "https://github.com/Bekaboo/dropbar.nvim"
+  },
+  ["edgy.nvim"] = {
+    config = { "require'plugins.edgy'" },
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/edgy.nvim",
+    url = "https://github.com/folke/edgy.nvim"
   },
   ["formatter.nvim"] = {
     config = { "require'plugins.formatter-nvim'" },
@@ -164,6 +153,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
+  },
+  ["hlargs.nvim"] = {
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/hlargs.nvim",
+    url = "https://github.com/m-demare/hlargs.nvim"
   },
   ["indent-blankline.nvim"] = {
     config = { "require'plugins.indent-blankline'" },
@@ -182,42 +176,41 @@ _G.packer_plugins = {
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/lsp-colors.nvim",
     url = "https://github.com/folke/lsp-colors.nvim"
   },
+  ["lsp_signature.nvim"] = {
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
+    url = "https://github.com/ray-x/lsp_signature.nvim"
+  },
   ["lspkind-nvim"] = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
     url = "https://github.com/onsails/lspkind-nvim"
+  },
+  ["lua-json5"] = {
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/lua-json5",
+    url = "https://github.com/Joakker/lua-json5"
   },
   ["markdown-preview.nvim"] = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
     url = "https://github.com/iamcco/markdown-preview.nvim"
   },
-  ["minimap.vim"] = {
-    config = { "require'plugins.minimap'" },
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/minimap.vim",
-    url = "https://github.com/wfxr/minimap.vim"
-  },
   ["move.nvim"] = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/move.nvim",
     url = "https://github.com/fedepujol/move.nvim"
   },
-  nerdtree = {
-    config = { "require'plugins.nerdtree'" },
+  ["neo-tree.nvim"] = {
+    config = { "require'plugins.neotree'" },
     loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nerdtree",
-    url = "https://github.com/preservim/nerdtree"
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/neo-tree.nvim",
+    url = "https://github.com/nvim-neo-tree/neo-tree.nvim"
   },
-  ["nerdtree-git-plugin"] = {
+  ["nui.nvim"] = {
     loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nerdtree-git-plugin",
-    url = "https://github.com/Xuyuanp/nerdtree-git-plugin"
-  },
-  ["nord-vim"] = {
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nord-vim",
-    url = "https://github.com/arcticicestudio/nord-vim"
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["nvim-autopairs"] = {
     config = { "require'plugins.nvim-autopairs'" },
@@ -235,6 +228,31 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
     url = "https://github.com/crivotz/nvim-colorizer.lua"
+  },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
+  },
+  ["nvim-dap-python"] = {
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nvim-dap-python",
+    url = "https://github.com/mfussenegger/nvim-dap-python"
+  },
+  ["nvim-dap-ui"] = {
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
+    url = "https://github.com/rcarriga/nvim-dap-ui"
+  },
+  ["nvim-dap-virtual-text"] = {
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text",
+    url = "https://github.com/theHamsta/nvim-dap-virtual-text"
+  },
+  ["nvim-dap-vscode-js"] = {
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nvim-dap-vscode-js",
+    url = "https://github.com/mxsdev/nvim-dap-vscode-js"
   },
   ["nvim-gps"] = {
     config = { "require'plugins.nvim-gps'" },
@@ -270,11 +288,10 @@ _G.packer_plugins = {
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nvim-treesitter-endwise",
     url = "https://github.com/RRethy/nvim-treesitter-endwise"
   },
-  ["nvim-ts-autotag"] = {
-    config = { "require'plugins.vim-closetag'" },
+  ["nvim-ts-rainbow2"] = {
     loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
-    url = "https://github.com/windwp/nvim-ts-autotag"
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow2",
+    url = "https://github.com/HiPhish/nvim-ts-rainbow2"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
@@ -302,26 +319,33 @@ _G.packer_plugins = {
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/pretty-fold.nvim",
     url = "https://github.com/anuvyklack/pretty-fold.nvim"
   },
-  ["suda.vim"] = {
+  ["telescope-dap.nvim"] = {
     loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/suda.vim",
-    url = "https://github.com/lambdalisue/suda.vim"
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim",
+    url = "https://github.com/nvim-telescope/telescope-dap.nvim"
   },
   ["telescope.nvim"] = {
+    config = { "require'plugins.telescope'" },
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
-  ["trouble.nvim"] = {
-    config = { "require'plugins.trouble'" },
+  ["toggleterm.nvim"] = {
+    config = { "require'plugins.toggleterm'" },
     loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/trouble.nvim",
-    url = "https://github.com/folke/trouble.nvim"
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
   },
   ["vim-abolish"] = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-abolish",
     url = "https://github.com/tpope/vim-abolish"
+  },
+  ["vim-airline"] = {
+    config = { "require'plugins.vim-airline'" },
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-airline",
+    url = "https://github.com/vim-airline/vim-airline"
   },
   ["vim-airline-themes"] = {
     loaded = true,
@@ -343,11 +367,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-capslock",
     url = "https://github.com/tpope/vim-capslock"
-  },
-  ["vim-code-dark"] = {
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-code-dark",
-    url = "https://github.com/tomasiser/vim-code-dark"
   },
   ["vim-commentary"] = {
     loaded = true,
@@ -379,45 +398,20 @@ _G.packer_plugins = {
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
   },
+  ["vim-illuminate"] = {
+    loaded = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-illuminate",
+    url = "https://github.com/RRethy/vim-illuminate"
+  },
   ["vim-jdaddy"] = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-jdaddy",
     url = "https://github.com/tpope/vim-jdaddy"
   },
-  ["vim-matchup"] = {
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-matchup",
-    url = "https://github.com/andymass/vim-matchup"
-  },
-  ["vim-nerdtree-syntax-highlight"] = {
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-nerdtree-syntax-highlight",
-    url = "https://github.com/tiagofumo/vim-nerdtree-syntax-highlight"
-  },
-  ["vim-nerdtree-tabs"] = {
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-nerdtree-tabs",
-    url = "https://github.com/jistr/vim-nerdtree-tabs"
-  },
-  ["vim-numbertoggle"] = {
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-numbertoggle",
-    url = "https://github.com/jeffkreeftmeijer/vim-numbertoggle"
-  },
-  ["vim-rails"] = {
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-rails",
-    url = "https://github.com/tpope/vim-rails"
-  },
   ["vim-repeat"] = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-repeat",
     url = "https://github.com/tpope/vim-repeat"
-  },
-  ["vim-ruby"] = {
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/vim-ruby",
-    url = "https://github.com/vim-ruby/vim-ruby"
   },
   ["vim-signify"] = {
     loaded = true,
@@ -448,90 +442,93 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: trouble.nvim
-time([[Config for trouble.nvim]], true)
-require'plugins.trouble'
-time([[Config for trouble.nvim]], false)
--- Config for: blamer.nvim
-time([[Config for blamer.nvim]], true)
-require'plugins.blamer'
-time([[Config for blamer.nvim]], false)
--- Config for: nvim-gps
-time([[Config for nvim-gps]], true)
-require'plugins.nvim-gps'
-time([[Config for nvim-gps]], false)
--- Config for: dashboard-nvim
-time([[Config for dashboard-nvim]], true)
-require'plugins.dashboard-nvim'
-time([[Config for dashboard-nvim]], false)
--- Config for: minimap.vim
-time([[Config for minimap.vim]], true)
-require'plugins.minimap'
-time([[Config for minimap.vim]], false)
--- Config for: nvim-notify
-time([[Config for nvim-notify]], true)
-require'plugins.nvim-notify'
-time([[Config for nvim-notify]], false)
--- Config for: vim-autoformat
-time([[Config for vim-autoformat]], true)
-require'plugins.autoformat'
-time([[Config for vim-autoformat]], false)
--- Config for: nerdtree
-time([[Config for nerdtree]], true)
-require'plugins.nerdtree'
-time([[Config for nerdtree]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 require'plugins.treesitter'
 time([[Config for nvim-treesitter]], false)
--- Config for: formatter.nvim
-time([[Config for formatter.nvim]], true)
-require'plugins.formatter-nvim'
-time([[Config for formatter.nvim]], false)
--- Config for: nvim-colorizer.lua
-time([[Config for nvim-colorizer.lua]], true)
-require'plugins.colorizer'
-time([[Config for nvim-colorizer.lua]], false)
--- Config for: indentLine
-time([[Config for indentLine]], true)
-require'plugins.indentLine'
-time([[Config for indentLine]], false)
--- Config for: nvim-ts-autotag
-time([[Config for nvim-ts-autotag]], true)
-require'plugins.vim-closetag'
-time([[Config for nvim-ts-autotag]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-require'plugins.nvim-autopairs'
-time([[Config for nvim-autopairs]], false)
--- Config for: indent-blankline.nvim
-time([[Config for indent-blankline.nvim]], true)
-require'plugins.indent-blankline'
-time([[Config for indent-blankline.nvim]], false)
--- Config for: FTerm.nvim
-time([[Config for FTerm.nvim]], true)
-require'plugins.fterm'
-time([[Config for FTerm.nvim]], false)
--- Config for: cmp-tabnine
-time([[Config for cmp-tabnine]], true)
-require'plugins.cmp-tabnine'
-time([[Config for cmp-tabnine]], false)
--- Config for: friendly-snippets
-time([[Config for friendly-snippets]], true)
-require'plugins.friendly-snippets'
-time([[Config for friendly-snippets]], false)
 -- Config for: octo.nvim
 time([[Config for octo.nvim]], true)
 require'plugins.octo'
 time([[Config for octo.nvim]], false)
--- Config for: vim-webdevicons
-time([[Config for vim-webdevicons]], true)
-require'plugins.web-devicons'
-time([[Config for vim-webdevicons]], false)
 -- Config for: nvim-treesitter-endwise
 time([[Config for nvim-treesitter-endwise]], true)
 require'plugins.nvim-treesitter-endwise'
 time([[Config for nvim-treesitter-endwise]], false)
+-- Config for: nvim-notify
+time([[Config for nvim-notify]], true)
+require'plugins.nvim-notify'
+time([[Config for nvim-notify]], false)
+-- Config for: neo-tree.nvim
+time([[Config for neo-tree.nvim]], true)
+require'plugins.neotree'
+time([[Config for neo-tree.nvim]], false)
+-- Config for: vim-autoformat
+time([[Config for vim-autoformat]], true)
+require'plugins.autoformat'
+time([[Config for vim-autoformat]], false)
+-- Config for: friendly-snippets
+time([[Config for friendly-snippets]], true)
+require'plugins.friendly-snippets'
+time([[Config for friendly-snippets]], false)
+-- Config for: bufferline.nvim
+time([[Config for bufferline.nvim]], true)
+require'plugins.bufferline'
+time([[Config for bufferline.nvim]], false)
+-- Config for: vim-airline
+time([[Config for vim-airline]], true)
+require'plugins.vim-airline'
+time([[Config for vim-airline]], false)
+-- Config for: nvim-gps
+time([[Config for nvim-gps]], true)
+require'plugins.nvim-gps'
+time([[Config for nvim-gps]], false)
+-- Config for: blamer.nvim
+time([[Config for blamer.nvim]], true)
+require'plugins.blamer'
+time([[Config for blamer.nvim]], false)
+-- Config for: vim-webdevicons
+time([[Config for vim-webdevicons]], true)
+require'plugins.web-devicons'
+time([[Config for vim-webdevicons]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+require'plugins.toggleterm'
+time([[Config for toggleterm.nvim]], false)
+-- Config for: nvim-colorizer.lua
+time([[Config for nvim-colorizer.lua]], true)
+require'plugins.colorizer'
+time([[Config for nvim-colorizer.lua]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+require'plugins.nvim-autopairs'
+time([[Config for nvim-autopairs]], false)
+-- Config for: indentLine
+time([[Config for indentLine]], true)
+require'plugins.indentLine'
+time([[Config for indentLine]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+require'plugins.telescope'
+time([[Config for telescope.nvim]], false)
+-- Config for: indent-blankline.nvim
+time([[Config for indent-blankline.nvim]], true)
+require'plugins.indent-blankline'
+time([[Config for indent-blankline.nvim]], false)
+-- Config for: formatter.nvim
+time([[Config for formatter.nvim]], true)
+require'plugins.formatter-nvim'
+time([[Config for formatter.nvim]], false)
+-- Config for: edgy.nvim
+time([[Config for edgy.nvim]], true)
+require'plugins.edgy'
+time([[Config for edgy.nvim]], false)
+
+_G._packer.inside_compile = false
+if _G._packer.needs_bufread == true then
+  vim.cmd("doautocmd BufRead")
+end
+_G._packer.needs_bufread = false
+
 if should_profile then save_profiles() end
 
 end)

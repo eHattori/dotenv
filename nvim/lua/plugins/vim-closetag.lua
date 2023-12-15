@@ -1,5 +1,1 @@
-vim.cmd([[
-
-
-	
-]])
+require('hlargs').setup()

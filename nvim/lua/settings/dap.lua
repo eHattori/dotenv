@@ -126,14 +126,10 @@ require('dapui').setup({
 dap.listeners.after.event_initialized['dapui_config'] = function()
   vim.cmd('tabfirst|tabnext')
   dapui.open()
-  vim.cmd[[
-    :NvimTreeClose
-  ]]
 end
 dap.listeners.before.event_terminated['dapui_config'] = function()
   dap.disconnect({ terminateDebuggee = true })
   vim.cmd[[
-    :NvimTreeOpen
     :! fuser -k -n tcp 3000
     :! for pid in $(ps -ef | awk '/vsDebugServer/ {print $2}'); do kill -9 $pid; done
   ]]
@@ -154,18 +150,18 @@ end
 buf_map('n', '<F9>', ':lua require(\'dap\').toggle_breakpoint()<CR>')
 buf_map('n', '<F21>', ':lua require(\'dap\').set_breakpoint(vim.fn.input(\'Breakpoint condition: \'))<CR>')
 buf_map('n', '<F45>', ':lua require(\'dap\').set_breakpoint(nil, nil, vim.fn.input(\'Log point message: \'))<CR>')
-buf_map('n', '<c-A-d>',  ':lua require(\'dap\').continue()<CR>')
-  buf_map('n', '<F41>', ':lua require(\'dap\').run_to_cursor()<CR>')
-  buf_map('n', '<F17>', ':lua require(\'dap\').terminate()<CR>')
+buf_map('n', '<F5>',  ':lua vim.cmd.Neotree(\'close\') require(\'dap\').continue()<CR>')
+buf_map('n', '<F41>', ':lua require(\'dap\').run_to_cursor()<CR>')
+buf_map('n', '<F17>', ':lua require(\'dap\').terminate()<CR>')
 buf_map('n', '<F10>', ':lua require(\'dap\').step_over()<CR>')
 buf_map('n', '<F11>', ':lua require(\'dap\').step_into()<CR>')
 buf_map('n', '<F23>', ':lua require(\'dap\').step_out()<CR>')
 
-buf_map('n', '<C-D>', ':lua require(\'dapui\').toggle()<CR>')
+buf_map('n', '<C-D>', ':lua vim.cmd.Neotree(\'close\')  require(\'dapui\').toggle()<CR>')
 
 -- # DAP Config
-local dap = require('dap')
-require('dap-python').setup('/home/hattori/.pyenv/shims/python')
+-- local dap = require('dap')
+-- require('dap-python').setup('/home/hattori/.pyenv/shims/python')
 
 -- !DEPRECATED!
 -- dap.adapters.chrome = {
@@ -195,9 +191,6 @@ local exts = {
   'javascriptreact',
   'typescriptreact',
   -- using pwa-chrome
-  'vue',
-  'svelte',
-  'python',
 }
 
 dap.adapters.node = {
@@ -222,21 +215,42 @@ for i, ext in ipairs(exts) do
       protocol = 'inspector',
       envFile = '${workspaceFolder}/.env',
     },
-    -- {
-    --   type = 'pwa-node',
-    --   request = 'launch',
-    --   name = 'Launch Test Current File (pwa-node with jest)',
-    --   program: '${workspaceFolder}/node_modules/.bin/jest',
-    --   cwd = vim.fn.getcwd(),
-    --   runtimeArgs = { '${fileBasenameNoExtension}' },
-    --   runtimeExecutable = 'node',
-    --   args = { '${file}', '--coverage', 'false'},
-    --   rootPath = '${workspaceFolder}',
-    --   sourceMaps = true,
-    --   console = 'integratedTerminal',
-    --   internalConsoleOptions = 'neverOpen',
-    --   skipFiles = { '<node_internals>/**', 'node_modules/**' },
-    -- },
+    {
+      type = 'pwa-node',
+      request = 'launch',
+      name = 'Launch Test Current File (pwa-node with jest)',
+      skipFiles = { '<node_internals>/**' },
+      runtimeExecutable = 'npm',
+      runtimeArgs = { 'test', '--', '${file}'},
+      console = 'integratedTerminal',
+      cwd = vim.fn.getcwd(),
+      sourceMaps = true,
+      protocol = 'inspector',
+      -- rootPath = '${workspaceFolder}',
+      -- envFile = '${workspaceFolder}/.env',
+      -- skipFiles = { '<node_internals>/**', 'node_modules/**' },
+      -- program: '${workspaceFolder}/node_modules/.bin/jest',
+      -- runtimeArgs = { '${fileBasenameNoExtension}' },
+      -- internalConsoleOptions = 'neverOpen',
+    },
+    {
+      type = 'pwa-node',
+      request = 'launch',
+      name = 'Launch E2E Test Current File (pwa-node with jest)',
+      skipFiles = { '<node_internals>/**' },
+      runtimeExecutable = 'npm',
+      runtimeArgs = { 'run', 'test:e2e', '--', '${file}'},
+      console = 'integratedTerminal',
+      cwd = vim.fn.getcwd(),
+      sourceMaps = true,
+      protocol = 'inspector',
+      -- rootPath = '${workspaceFolder}',
+      -- envFile = '${workspaceFolder}/.env',
+      -- skipFiles = { '<node_internals>/**', 'node_modules/**' },
+      -- program: '${workspaceFolder}/node_modules/.bin/jest',
+      -- runtimeArgs = { '${fileBasenameNoExtension}' },
+      -- internalConsoleOptions = 'neverOpen',
+    },
     -- {
     --   type = 'pwa-node',
     --   request = 'launch',
