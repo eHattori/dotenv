@@ -52,7 +52,7 @@ return require('packer').startup(function(use)
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = lua_path"treesitter" }
-  use { 'lukas-reineke/indent-blankline.nvim', config = lua_path"indent-blankline" }
+ -- use { 'lukas-reineke/indent-blankline.nvim', config = lua_path"indent-blankline" }
   use { 'Yggdroot/indentLine', config = lua_path"indentLine" }
   use { 'SmiteshP/nvim-gps', config = lua_path"nvim-gps" }
   use { 'HiPhish/nvim-ts-rainbow2' }
@@ -136,22 +136,6 @@ return require('packer').startup(function(use)
   -- Colorschema
   use { 'dracula/vim', as = 'dracula' }
   use { "catppuccin/nvim", as = "catppuccin" }
-
-  -- Debug
-  use {
-    'Joakker/lua-json5',
-    run = './install.sh'
-  }
-  use {
-    'mfussenegger/nvim-dap',
-    requires = {
-      'rcarriga/nvim-dap-ui',
-      'nvim-treesitter/nvim-treesitter',
-      'theHamsta/nvim-dap-virtual-text',
-      'nvim-telescope/telescope-dap.nvim',
-      'mxsdev/nvim-dap-vscode-js',
-    }
-  }
 
   use { 'mfussenegger/nvim-dap-python' }
 

@@ -347,8 +347,8 @@ for i, ext in ipairs(exts) do
   }
 end
 
-local json5 = require('json5')
-require('dap.ext.vscode').json_decode = json5.parse
+-- local json5 = require('json5')
+-- require('dap.ext.vscode').json_decode = json5.parse
 -- ## DAP `launch.json`
 require('dap.ext.vscode').load_launchjs(nil, {
   ['python'] = {

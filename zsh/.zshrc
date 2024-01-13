@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -8,7 +15,8 @@ export ZSH="/home/hattori/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -60,12 +68,20 @@ export HISTFILESIZE=10000
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  asdf
+  # asdf
   git
+  command-not-found
+  bgnotify
   dotenv
-  pip
-  pyenv
-  python
+  docker 
+  docker-compose
+  vscode
+  node 
+  # npx 
+  npm
+  # pip
+  # pyenv
+  # python
   # zsh_reload
   zsh-syntax-highlighting
   zsh-autosuggestions
@@ -94,17 +110,16 @@ export EDITOR='nvim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ll="ls -lahG"
 
-export NVM_DIR="/home/hattori/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-export DOCKER_BUILDKIT=1
+
+# export DOCKER_BUILDKIT=1
 
 ZSH_THEME_VIRTUALENV_PREFIX="("
 ZSH_THEME_VIRTUALENV_SUFFIX=") "
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-source ~/.rvm/scripts/rvm
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg_no_bold[cyan]%}->"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -116,42 +131,8 @@ alias ls="ls -lah"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Config CTX
-export PATH=$PATH:$HOME/binxport PATH=$PATH:$HOME/.ctx/ctx.sh
-. $HOME/.ctx/ctx.sh
-
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-export PYENV_VERSION="3.7.1"
-eval "$(pyenv init --path)"
-
-[ -f ~/dev/config/vars ] && source ~/dev/config/vars
-export PATH=$PATH:$HOME/bin
-export PATH=$PATH:$HOME/bin
-eval "$(pyenv virtualenv-init -)"
-
-# Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
 export DOCKERHOST=$(ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+')
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/usr/local/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/bin/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/usr/local/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/bin/google-cloud-sdk/completion.zsh.inc'; fi
-. "/home/hattori/.acme.sh/acme.sh.env"
-
-export SYSCONFDIR="$HOME/.config/dunst/dunstrc"
-
-
-export GOPATH=$HOME/go
-export GOROOT=/usr/local/go/
-export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
-
-eval $(ssh-agent -s) &>/dev/null
-ssh-add ~/.ssh/id_rsa_gitlab_cloudmed &>/dev/null
-

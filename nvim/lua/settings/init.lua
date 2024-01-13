@@ -42,8 +42,8 @@ vim.opt.shell = '/bin/zsh'
 vim.opt.termguicolors = true
 vim.opt.background = 'light'
 
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 -- vim.opt.noexpandtab = true
@@ -66,5 +66,6 @@ vim.cmd([[
     set foldlevel=20
     set foldmethod=expr
     set foldexpr=nvim_treesitter#foldexpr()
+    set clipboard+=unnamedplus
 ]])
 vim.loader.enable()

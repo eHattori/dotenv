@@ -1,12 +1,13 @@
 ----------------- MOVE LINE UP/DOWN AND DUPPLICATE -------------
 vim.cmd([[
+    let mapleader = ";"
     noremap <c-p> :Telescope find_files hidden=true<CR>
     noremap <c-f> :Telescope live_grep <CR>
     noremap <c-]> :Telescope buffers <CR>
 ]])
 
-vim.keymap.set('n', '<F12>', ':Telescope lsp_definitions<CR>', {noremap = true, silent = true})
 vim.keymap.set('n', '<F8>', ':Telescope lsp_references<CR>', {noremap = true, silent = true})
+vim.keymap.set('n', '<F12>', ':Telescope lsp_definitions<CR>', {noremap = true, silent = true})
 
 ----------------- MOVE LINE UP/DOWN AND DUPPLICATE -------------
 vim.api.nvim_set_keymap('n', '<A-Down>', ":MoveLine(1)<CR>", { noremap = true, silent = true })
@@ -14,11 +15,12 @@ vim.api.nvim_set_keymap('n', '<A-Up>', ":MoveLine(-1)<CR>", { noremap = true, si
 vim.api.nvim_set_keymap('v', '<A-Down>', ":MoveBlock(1)<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<A-Up>', ":MoveBlock(-1)<CR>", { noremap = true, silent = true })
 
-vim.keymap.set('n', '<c-A-S-Down>', "yyp<Up><CR>", {noremap = true, silent = true})
-vim.keymap.set('n', '<c-A-S-Up>', "yyp<CR>", {noremap = true, silent = true})
-vim.keymap.set('v', '<c-A-S-Down>', "YP<Up><CR>", {noremap = true, silent = true})
-vim.keymap.set('v', '<c-A-S-Up>', "YP<Down><CR>", {noremap = true, silent = true})
-vim.keymap.set('v', '<c-A-S-Up>', "YP<Up><CR>", {noremap = true, silent = true})
+vim.keymap.set('n', '<A-S-Down>', "yyp<Up>", {noremap = true, silent = true})
+
+vim.keymap.set('n', '<A-S-Up>', "yyp<CR>", {noremap = true, silent = true})
+vim.keymap.set('v', '<A-S-Down>', "YP<Up><CR>", {noremap = true, silent = true})
+vim.keymap.set('v', '<A-S-Up>', "YP<Down><CR>", {noremap = true, silent = true})
+vim.keymap.set('v', '<A-S-Up>', "YP<Up><CR>", {noremap = true, silent = true})
 ----------------- UTILS --------------------------
 vim.keymap.set('n', '<C-_>', ':Commentary<CR>', {noremap = true, silent = false})
 vim.keymap.set('v', '<C-_>', ':Commentary<CR>', {noremap = true, silent = false})
@@ -38,10 +40,11 @@ vim.keymap.set('v', '<C-x>', 'c<CR>', {noremap = true, silent = false})
 -- vim.keymap.set('n', '<F3>', ':Autoformat<CR>', {noremap = true })
 -- vim.keymap.set('n', '<C-i>', ':Autoformat<CR>', {noremap = true })
 vim.keymap.set('n', '<C-i>', ':lua vim.lsp.buf.format()<CR>', {noremap = true })
-vim.keymap.set('n', '<c-s>', ':update<CR>', {noremap = true, silent = false})
-vim.keymap.set('v', '<c-s>', '<C-C>:update<CR>', {noremap = true, silent = false})
-vim.keymap.set('i', '<c-s>', '<Esc>:update<CR>gi', {noremap = true, silent = false})
-vim.keymap.set('n', '<c-q>', ':q<CR>', {noremap = true, silent = false})
+vim.keymap.set('n', '<c-S-i>', ':lua vim.lsp.buf.format()<CR>', {noremap = true })
+vim.keymap.set('n', '<c-s>', ':update!<CR>', {noremap = true, silent = false})
+vim.keymap.set('v', '<c-s>', ':update!<CR>', {noremap = true, silent = false})
+vim.keymap.set('i', '<c-s>', ':update!<CR>gi', {noremap = true, silent = false})
+vim.keymap.set('n', '<c-q>', ':qall<CR>', {noremap = true, silent = false})
 
 ----------------- NERDTREE --------------------------
 -- vim.keymap.set('n', '<C-b>', ':NvimTreeToggle<CR>', {noremap = true, silent = true})

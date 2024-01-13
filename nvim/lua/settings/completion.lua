@@ -155,9 +155,9 @@ cmp.setup({
 
 
     -- Format on save
-  if client.resolved_capabilities.document_formatting then
-    vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting()]]
-  end
+  -- if client.resolved_capabilities.document_formatting then
+  --   vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting()]]
+  -- end
   
   -- Document highlight
   if client.resolved_capabilities.document_highlight then
