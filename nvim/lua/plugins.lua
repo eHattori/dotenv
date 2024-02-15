@@ -143,7 +143,7 @@ return require('packer').startup(function(use)
   -- Telescope
   use { 'nvim-lua/plenary.nvim' }
   use { 'nvim-telescope/telescope.nvim', config = lua_path"telescope"}
-  use { 'pwntester/octo.nvim', config = lua_path"octo" }
+  -- use { 'pwntester/octo.nvim', config = lua_path"octo" }
 
   -- General Plugins
   use { 'Bekaboo/dropbar.nvim'}
