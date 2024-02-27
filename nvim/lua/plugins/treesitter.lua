@@ -41,7 +41,7 @@ require'nvim-treesitter.configs'.setup {
     rainbow = {
       enable = true,
       -- list of languages you want to disable the plugin for
-      disable = {}, -- 'tsx', 'jsx', 'cpp', 'lua', 'bicep' },
+      disable = {'bash'}, -- 'tsx', 'jsx', 'cpp', 'lua', 'bicep' },
       -- Which query to use for finding delimiters
       query = 'rainbow-parens',
       -- Highlight the entire buffer all at once
