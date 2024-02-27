@@ -10,10 +10,12 @@ vim.keymap.set('n', '<F8>', ':Telescope lsp_references<CR>', {noremap = true, si
 vim.keymap.set('n', '<F12>', ':Telescope lsp_definitions<CR>', {noremap = true, silent = true})
 
 ----------------- MOVE LINE UP/DOWN AND DUPPLICATE -------------
-vim.api.nvim_set_keymap('n', '<A-Down>', ":MoveLine(1)<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-Up>', ":MoveLine(-1)<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<A-Down>', ":MoveBlock(1)<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<A-Up>', ":MoveBlock(-1)<CR>", { noremap = true, silent = true })
+--vim.api.nvim_set_keymap('n', '<A-Down>', ":MoveLine(1)<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-Down>', ":m+<CR>==", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-Up>', ":m -2<CR>==", { noremap = true, silent = true })
+--vim.api.nvim_set_keymap('v', '<A-Down>', ":MoveBlock(1)<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<A-Down>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<A-Up>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
 vim.keymap.set('n', '<A-S-Down>', "yyp<Up>", {noremap = true, silent = true})
 
@@ -100,13 +102,6 @@ vim.cmd([[
  ]])
     
 ---------------- Terminal ------------------------------
--- vim.keymap.set('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
-
--- vim.cmd([[
---     nnoremap <silent> <A-i> <CMD>lua require("FTerm").toggle()<CR>
---     noremap  V <A-i> <CMD>lua require("FTerm").toggle()<CR>
---     inoremap <silent> <A-i><CMD>lua require("FTerm").toggle()<CR>
--- ]])
 vim.keymap.set('n', '<A-i>', ':ToggleTerm<CR>', {noremap = true })
 
 function _G.set_terminal_keymaps()
@@ -128,3 +123,7 @@ vim.cmd([[
 ---------------- Markdown --------------------------------
 vim.keymap.set('n', '<F6>', ':MarkdownPreviewToggle<CR>', {noremap = true, silent = true})
 vim.keymap.set('n', '<c-k>', 'lua vim.lsp.buf.signature_help()<CR>', {noremap = true, silent = true})
+
+---------------- Fold --------------------------------
+vim.keymap.set('n', 'za', ':set foldmethod=indent<CR>za', {noremap = true, silent = false})
+

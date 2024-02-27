@@ -47,14 +47,18 @@ return require('packer').startup(function(use)
   use { 'rafamadriz/friendly-snippets', config= lua_path"friendly-snippets" }
   use { 'windwp/nvim-autopairs', config = lua_path"nvim-autopairs" }
   -- use { 'andymass/vim-matchup' }
-  -- use { 'windwp/nvim-ts-autotag', config = lua_path"vim-closetag"}
+  use { 'windwp/nvim-ts-autotag', config = lua_path"vim-closetag"}
   use {'ray-x/lsp_signature.nvim'}
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = lua_path"treesitter" }
  -- use { 'lukas-reineke/indent-blankline.nvim', config = lua_path"indent-blankline" }
   use { 'Yggdroot/indentLine', config = lua_path"indentLine" }
-  use { 'SmiteshP/nvim-gps', config = lua_path"nvim-gps" }
+  --  use { 'SmiteshP/nvim-gps', config = lua_path"nvim-gps" }
+  use {
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig"
+  }
   use { 'HiPhish/nvim-ts-rainbow2' }
   use { 'RRethy/nvim-treesitter-endwise', config = lua_path"nvim-treesitter-endwise" }
 
@@ -151,7 +155,10 @@ return require('packer').startup(function(use)
   use { 'rcarriga/nvim-notify', config = lua_path"nvim-notify" }
   use {"akinsho/toggleterm.nvim", tag = '*', config = lua_path"toggleterm" }
   -- use { 'numtostr/FTerm.nvim', config = lua_path"fterm" }
-  use { 'anuvyklack/pretty-fold.nvim' }
+  -- use { 'anuvyklack/pretty-fold.nvim' }
   use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons', config=lua_path"bufferline"}
+  use {
+  "ray-x/lsp_signature.nvim",
+}
 
 end)

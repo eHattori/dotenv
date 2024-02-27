@@ -1,1 +1,5 @@
-require('hlargs').setup()
+require'nvim-treesitter.configs'.setup {
+  autotag = {
+    enable = true,
+  }
+}

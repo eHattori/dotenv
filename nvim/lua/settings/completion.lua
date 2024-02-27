@@ -3,8 +3,8 @@ local lspkind = require'lspkind'
 local nvim_lsp = require'lspconfig'
 local luasnip = require("luasnip")
 
--- require "lsp_signature".setup()
-require('pretty-fold').setup()
+require "lsp_signature".setup()
+-- require('pretty-fold').setup()
 
 local lspkind = require('lspkind')
 
@@ -106,9 +106,9 @@ cmp.setup({
       { name = 'luasnip', max_item_count = 5 },
       { name = 'buffer', max_item_count = 2 },
       -- { name = 'path', max_item_count = 1 },
-      { name = 'calc', max_item_count = 1 },
+      -- { name = 'calc', max_item_count = 1 },
       { name = 'tags', max_item_count = 1 },
-      { name = 'rg', max_item_count = 1 },
+      -- { name = 'rg', max_item_count = 1 },
     }),
   })
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).

@@ -1,7 +1,28 @@
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+	ensured_installed = {
+		"bash",
+		"comment",
+		"css",
+		"gitignore",
+		"dockerfile",
+		"html",
+		"javascript",
+		"jsdoc",
+		"jsonc",
+		"lua",
+		"markdown",
+		"regex",
+		"scss",
+		"toml",
+		"typescript",
+		"vim",
+		"jsx",
+		"tsx",
+		"query",
+		"yaml",
+    },
     highlight = {
-      enable = true,              -- false will disable the whole extension
+      enable = false,              -- false will disable the whole extension
     },
     context_commentstring = {
       enable = true,
@@ -13,10 +34,14 @@ require'nvim-treesitter.configs'.setup {
     autotag = {
      enable = true,
     },
+    indent = {
+      enable = true,
+      disable = {},
+    },
     rainbow = {
       enable = true,
       -- list of languages you want to disable the plugin for
-      disable = { 'tsx', 'jsx', 'cpp', 'lua' },
+      disable = {}, -- 'tsx', 'jsx', 'cpp', 'lua', 'bicep' },
       -- Which query to use for finding delimiters
       query = 'rainbow-parens',
       -- Highlight the entire buffer all at once

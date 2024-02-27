@@ -24,7 +24,7 @@ vim.opt.undofile = true
 vim.opt.undodir = "/tmp"
 -- vim.opt.foldlevel = 1
 -- vim.opt.foldmethod = 'indent'
-vim.opt.foldmethod = 'syntax'
+-- vim.opt.foldmethod = 'syntax'
 -- vim.opt.inccommand = 'nosplit'
 vim.opt.splitkeep = "screen"
 vim.opt.showtabline = 2
@@ -56,16 +56,14 @@ vim.cmd('set t_Co=256')
 vim.cmd('colorscheme catppuccin-mocha')
 vim.cmd('set background=dark')
 vim.cmd([[
-    set nofoldenable
     highlight Cursor guifg=black guibg=white
     highlight iCursor guifg=white guibg=steelblue
     set guicursor=n-v-c:block-Cursor
     set guicursor+=i:ver100-iCursor
     set guicursor+=n-v-c:blinkon0
     set guicursor+=i:blinkwait10
-    set foldlevel=20
-    set foldmethod=expr
-    set foldexpr=nvim_treesitter#foldexpr()
     set clipboard+=unnamedplus
+    set foldmethod=syntax
+    set foldlevel=2
 ]])
 vim.loader.enable()
