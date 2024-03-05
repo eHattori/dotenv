@@ -38,23 +38,17 @@ return require('packer').startup(function(use)
   use { 'hrsh7th/cmp-buffer' }
   use { 'L3MON4D3/LuaSnip' }
   use { 'saadparwaiz1/cmp_luasnip' }
-  -- use { 'hrsh7th/cmp-path' }
-  -- use { 'hrsh7th/cmp-calc' }
   use { 'hrsh7th/cmp-cmdline' }
-  -- use { 'ray-x/cmp-treesitter' }
+  use { 'ray-x/cmp-treesitter' }
   use { 'lukas-reineke/cmp-rg' }
-  -- use { 'quangnguyen30192/cmp-nvim-tags' }
   use { 'rafamadriz/friendly-snippets', config= lua_path"friendly-snippets" }
   use { 'windwp/nvim-autopairs', config = lua_path"nvim-autopairs" }
-  -- use { 'andymass/vim-matchup' }
   use { 'windwp/nvim-ts-autotag', config = lua_path"vim-closetag"}
   use {'ray-x/lsp_signature.nvim'}
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = lua_path"treesitter" }
- -- use { 'lukas-reineke/indent-blankline.nvim', config = lua_path"indent-blankline" }
   use { 'Yggdroot/indentLine', config = lua_path"indentLine" }
-  --  use { 'SmiteshP/nvim-gps', config = lua_path"nvim-gps" }
   use {
     "SmiteshP/nvim-navic",
     requires = "neovim/nvim-lspconfig"
@@ -78,16 +72,8 @@ return require('packer').startup(function(use)
   use { 'vim-airline/vim-airline-themes' }
 
   -- Explorer
-  -- use {
-  --   'nvim-tree/nvim-tree.lua',
-  --   requires = {
-  --   'nvim-tree/nvim-web-devicons', -- optional
-  --   },
-  --   config = lua_path"nvim-tree"
-  -- }
   use { "nvim-neo-tree/neo-tree.nvim",
         requires = {
-      --   'nvim-tree/nvim-web-devicons', -- optional
         "MunifTanjim/nui.nvim",
         "nvim-lua/plenary.nvim",
         "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -97,12 +83,6 @@ return require('packer').startup(function(use)
 
   -- Multicursors
   use { 'mg979/vim-visual-multi'}
-  -- use {'smoka7/multicursors.nvim',
-  --   requires = {
-  --     'smoka7/hydra.nvim',
-  --   },
-  --   config = lua_path"multicursors"
-  -- }
 
   -- Color
   use { 'crivotz/nvim-colorizer.lua', config = lua_path"colorizer" }
@@ -111,7 +91,6 @@ return require('packer').startup(function(use)
   -- Git
   use { 'APZelos/blamer.nvim', config = lua_path"blamer" }
   use { 'mhinz/vim-signify' }
-
 
   -- Registers & clipboard
   use { 'dstein64/nvim-scrollview' }
@@ -132,7 +111,7 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-jdaddy' }
   use { 'tpope/vim-fugitive' }
   use { 'tpope/vim-commentary' }
-  -- use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp', config=lua_path"cmp-tabnine"}
+  use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp', config=lua_path"cmp-tabnine"}
 
   -- Tmux
   use { 'christoomey/vim-tmux-navigator' }
@@ -141,24 +120,18 @@ return require('packer').startup(function(use)
   use { 'dracula/vim', as = 'dracula' }
   use { "catppuccin/nvim", as = "catppuccin" }
 
-  use { 'mfussenegger/nvim-dap-python' }
-
-
   -- Telescope
   use { 'nvim-lua/plenary.nvim' }
   use { 'nvim-telescope/telescope.nvim', config = lua_path"telescope"}
-  -- use { 'pwntester/octo.nvim', config = lua_path"octo" }
 
   -- General Plugins
+  use { 'echasnovski/mini.bufremove'}
+  use {'jose-elias-alvarez/null-ls.nvim'}
+  use {'MunifTanjim/prettier.nvim', config = lua_path"prettier"}
   use { 'Bekaboo/dropbar.nvim'}
   use { 'folke/edgy.nvim', config = lua_path"edgy" }
   use { 'rcarriga/nvim-notify', config = lua_path"nvim-notify" }
   use {"akinsho/toggleterm.nvim", tag = '*', config = lua_path"toggleterm" }
-  -- use { 'numtostr/FTerm.nvim', config = lua_path"fterm" }
-  -- use { 'anuvyklack/pretty-fold.nvim' }
   use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons', config=lua_path"bufferline"}
-  use {
-  "ray-x/lsp_signature.nvim",
-}
 
 end)

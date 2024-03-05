@@ -1,4 +1,5 @@
 local cmp = require'cmp'
+local compare = require('cmp.config.compare')
 local lspkind = require'lspkind'
 local nvim_lsp = require'lspconfig'
 local luasnip = require("luasnip")
@@ -51,6 +52,20 @@ local cmp_kinds = {
 require("luasnip.loaders.from_vscode").lazy_load({})
 
 cmp.setup({
+  sorting = {
+    priority_weight = 2,
+    comparators = {
+      require('cmp_tabnine.compare'),
+      compare.offset,
+      compare.exact,
+      compare.score,
+      compare.recently_used,
+      compare.kind,
+      compare.sort_text,
+      compare.length,
+      compare.order,
+    },
+    },
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
@@ -97,6 +112,20 @@ cmp.setup({
       local menu = source_mapping[entry.source.name]
       vim_item.kind = cmp_kinds[vim_item.kind]
       vim_item.menu = menu
+      if entry.source.name == "cmp_tabnine" then
+        local detail = (entry.completion_item.data or {}).detail
+        vim_item.kind = ""
+        if detail and detail:find('.*%%.*') then
+          vim_item.kind = vim_item.kind .. ' ' .. detail
+        end
+
+        if (entry.completion_item.data or {}).multiline then
+           vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
+        end
+      end
+
+      local maxwidth = 80
+      vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
       return vim_item
     end  },
     sources = cmp.config.sources({
@@ -105,10 +134,7 @@ cmp.setup({
       { name = 'treesitter', max_item_count = 5 },
       { name = 'luasnip', max_item_count = 5 },
       { name = 'buffer', max_item_count = 2 },
-      -- { name = 'path', max_item_count = 1 },
-      -- { name = 'calc', max_item_count = 1 },
       { name = 'tags', max_item_count = 1 },
-      -- { name = 'rg', max_item_count = 1 },
     }),
   })
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
@@ -183,23 +209,17 @@ end
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-
-  -- -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+-- -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
   local servers = {
     'tsserver',
     'eslint',
     'yamlls',
-    -- 'tsserver',
     'jsonls',
     'bashls',
     'cssls',
     'pyright',
-    -- 'typescriptreact',
-    -- 'solargraph',
     'html',
     'dockerls',
-    -- 'erlangls',
-    -- 'angularls',
   }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
@@ -209,67 +229,63 @@ end
       },
       capabilities = capabilities,
     }
-  end
+end
 
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = false,
     underline = true,
     signs = true,
   }
-  )
+)
 
+vim.o.updatetime = 250
 
+vim.api.nvim_create_autocmd("CursorHold", {
+  buffer = bufnr,
+  callback = function()
+    local opts = {
+      focusable = false,
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      border = 'rounded',
+      source = 'always',
+      signs = true,
+      prefix = ' ',
+      scope = 'cursor',
+    }
+    vim.diagnostic.open_float(nil, opts)
+  end
+})
 
+vim.cmd([[
 
-      vim.o.updatetime = 250
+" gray
+highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
+" blue
+highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
+" light blue
+highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+highlight! CmpItemKindInterface guibg=NONE guifg=#9CDCFE
+highlight! CmpItemKindText guibg=NONE guifg=#9CDCFE
+" pink
+highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
+highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
+" front
+highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
+highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
+highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
 
+highlight! DiagnosticLineNrError guibg=#51202A guifg=#FF0000 gui=bold
+highlight! DiagnosticLineNrWarn guibg=#51412A guifg=#FFA500 gui=bold
+highlight! DiagnosticLineNrInfo guibg=#1E535D guifg=#00FFFF gui=bold
+highlight! DiagnosticLineNrHint guibg=#1E205D guifg=#0000FF gui=bold
 
-      vim.api.nvim_create_autocmd("CursorHold", {
-        buffer = bufnr,
-        callback = function()
-          local opts = {
-            focusable = false,
-            close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-            border = 'rounded',
-            source = 'always',
-            signs = true,
-            prefix = ' ',
-            scope = 'cursor',
-          }
-          vim.diagnostic.open_float(nil, opts)
-        end
-      })
+sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=DiagnosticLineNrError
+sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=DiagnosticLineNrWarn
+sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=DiagnosticLineNrInfo
+sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=DiagnosticLineNrHint
 
-      vim.cmd([[
-
-      " gray
-      highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
-      " blue
-      highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
-      highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
-      " light blue
-      highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
-      highlight! CmpItemKindInterface guibg=NONE guifg=#9CDCFE
-      highlight! CmpItemKindText guibg=NONE guifg=#9CDCFE
-      " pink
-      highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
-      highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
-      " front
-      highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
-      highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
-      highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
-
-      highlight! DiagnosticLineNrError guibg=#51202A guifg=#FF0000 gui=bold
-      highlight! DiagnosticLineNrWarn guibg=#51412A guifg=#FFA500 gui=bold
-      highlight! DiagnosticLineNrInfo guibg=#1E535D guifg=#00FFFF gui=bold
-      highlight! DiagnosticLineNrHint guibg=#1E205D guifg=#0000FF gui=bold
-
-      sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=DiagnosticLineNrError
-      sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=DiagnosticLineNrWarn
-      sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=DiagnosticLineNrInfo
-      sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=DiagnosticLineNrHint
-
-      ]])
+]])
 
 

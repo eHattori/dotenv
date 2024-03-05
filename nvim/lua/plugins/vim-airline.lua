@@ -6,3 +6,5 @@ vim.cmd([[
     let g:airline_section_b = '%{airline#util#wrap(airline#extensions#branch#get_head(),0)[0:40]}'
     let g:airline#extensions#tabline#enabled = 0
 ]])
+
+require('mini.bufremove').setup()

@@ -30,7 +30,7 @@
     cursor_fg_color = "#f81ce5"
     cursor_bg_color = "#f81ce5"
     cursor_color_default = False
-    font = DroidSansM Nerd Font Propo 11
+    font = DroidSansM Nerd Font Propo 10
     foreground_color = "#ffffff"
     show_titlebar = False
     scrollback_lines = 50000

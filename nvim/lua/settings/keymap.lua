@@ -35,14 +35,12 @@ vim.keymap.set('n', '<c-y>', '<C-R><CR>', {noremap = true, silent = false})
 vim.keymap.set('i', '<c-y>', '<c-o><C-R><CR>', {noremap = true, silent = false})
 
 vim.keymap.set('v', '<C-x>', 'c<CR>', {noremap = true, silent = false})
--- vim.keymap.set('n', '<C-v>', 'p<CR>', {noremap = true, silent = false})
--- vim.keymap.set('v', '<C-v>', 'p<CR>', {noremap = true, silent = false})
--- vim.keymap.set('i', '<C-v>', 'p<CR>', {noremap = true, silent = false})
 
--- vim.keymap.set('n', '<F3>', ':Autoformat<CR>', {noremap = true })
--- vim.keymap.set('n', '<C-i>', ':Autoformat<CR>', {noremap = true })
-vim.keymap.set('n', '<C-i>', ':lua vim.lsp.buf.format()<CR>', {noremap = true })
-vim.keymap.set('n', '<c-S-i>', ':lua vim.lsp.buf.format()<CR>', {noremap = true })
+-- vim.keymap.set('n', '<C-i>', ':lua vim.lsp.buf.format()<CR>', {noremap = true })
+-- vim.keymap.set('n', '<c-S-i>', ':lua vim.lsp.buf.format()<CR>', {noremap = true })
+vim.keymap.set('n', '<C-i>', ':Prettier<CR>', {noremap = true })
+vim.keymap.set('n', '<c-S-i>', ':Prettier<CR>', {noremap = true })
+-- vim.keymap.set('n', '<c-Down>', ':Prettier<CR>', {noremap = true })
 vim.keymap.set('n', '<c-s>', ':update!<CR>', {noremap = true, silent = false})
 vim.keymap.set('v', '<c-s>', ':update!<CR>', {noremap = true, silent = false})
 vim.keymap.set('i', '<c-s>', ':update!<CR>gi', {noremap = true, silent = false})
@@ -50,7 +48,7 @@ vim.keymap.set('n', '<c-q>', ':qall<CR>', {noremap = true, silent = false})
 
 ----------------- NERDTREE --------------------------
 -- vim.keymap.set('n', '<C-b>', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
-vim.keymap.set('n', '<C-b>', ':Neotree toggle<CR>', {noremap = true, silent = true})
+vim.keymap.set('n', '<C-b>', ':Neotree toggle last<CR>', {noremap = true, silent = true})
 
 ----------------- SHIFT ARROW SELECTION --------------------------
 vim.cmd([[
@@ -125,5 +123,5 @@ vim.keymap.set('n', '<F6>', ':MarkdownPreviewToggle<CR>', {noremap = true, silen
 vim.keymap.set('n', '<c-k>', 'lua vim.lsp.buf.signature_help()<CR>', {noremap = true, silent = true})
 
 ---------------- Fold --------------------------------
-vim.keymap.set('n', 'za', ':set foldmethod=indent<CR>za', {noremap = true, silent = false})
+-- vim.keymap.set('n', 'za', ':set foldmethod=indent<CR>za', {noremap = true, silent = false})
 

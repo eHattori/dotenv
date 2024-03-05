@@ -1,4 +1,5 @@
 require'nvim-treesitter.configs'.setup {
+        auto_install = true,
 	ensured_installed = {
 		"bash",
 		"comment",
@@ -24,6 +25,7 @@ require'nvim-treesitter.configs'.setup {
     highlight = {
       enable = false,              -- false will disable the whole extension
     },
+    use_languagetree = true,
     context_commentstring = {
       enable = true,
       enable_autocmd = false,
@@ -31,8 +33,21 @@ require'nvim-treesitter.configs'.setup {
     matchup = {
       enable = true  
     },
-    autotag = {
-     enable = true,
+  autotag = {
+    enable = true,
+    filetypes = {
+      'html',
+      'javascript',
+      'typescript',
+      'javascriptreact',
+      'typescriptreact',
+      'tsx',
+      'jsx',
+      'css',
+      'lua',
+      'xml',
+      'markdown'
+      }
     },
     indent = {
       enable = true,
