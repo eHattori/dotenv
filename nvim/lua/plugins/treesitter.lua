@@ -17,7 +17,6 @@ require'nvim-treesitter.configs'.setup {
 		"toml",
 		"typescript",
 		"vim",
-		"jsx",
 		"tsx",
 		"query",
 		"yaml",
@@ -42,7 +41,6 @@ require'nvim-treesitter.configs'.setup {
       'javascriptreact',
       'typescriptreact',
       'tsx',
-      'jsx',
       'css',
       'lua',
       'xml',
@@ -51,7 +49,7 @@ require'nvim-treesitter.configs'.setup {
     },
     indent = {
       enable = true,
-      disable = {},
+      disable = {'jsx'},
     },
     rainbow = {
       enable = true,
@@ -72,3 +70,9 @@ require'nvim-treesitter.configs'.setup {
             },
     }
   }
+
+require('ufo').setup({
+    provider_selector = function(bufnr, filetype, buftype)
+        return {'treesitter', 'indent'}
+    end
+})

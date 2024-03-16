@@ -133,5 +133,17 @@ return require('packer').startup(function(use)
   use { 'rcarriga/nvim-notify', config = lua_path"nvim-notify" }
   use {"akinsho/toggleterm.nvim", tag = '*', config = lua_path"toggleterm" }
   use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons', config=lua_path"bufferline"}
+  use {'kevinhwang91/nvim-ufo', 
+    requires = {
+      'kevinhwang91/promise-async',
+      'luukvbaal/statuscol.nvim'
+    }, 
+    config=lua_path"ufo"
+  }
+  use{ 'anuvyklack/pretty-fold.nvim',
+   config = function()
+      require('pretty-fold').setup()
+   end
+  }
 
 end)

@@ -10,9 +10,19 @@ vim.fn.sign_define("DiagnosticSignHint",
 require("neo-tree").setup({
     close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
     popup_border_style = "rounded",
+    event_handlers = {
+        {
+            event = "neo_tree_popup_input_ready",
+            ---@param input NuiInput
+            handler = function(input)
+                -- enter input popup with normal mode by default.
+                vim.cmd("stopinsert")
+            end,
+        }
+    },
     enable_git_status = true,
     enable_diagnostics = true,
-    enable_normal_mode_for_inputs = false, -- Enable normal mode for input dialogs.
+    -- enable_normal_mode_for_inputs = false, -- Enable normal mode for input dialogs.
     source_selector = {
         tabs_layout = "equal",
         winbar = true,
@@ -112,7 +122,7 @@ require("neo-tree").setup({
         commands = {},
         window = {
             position = "left",
-            width = 80,
+            width = 100,
             mapping_options = {
                 noremap = true,
                 nowait = true,
