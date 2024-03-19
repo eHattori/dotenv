@@ -45,6 +45,10 @@ return require('packer').startup(function(use)
   use { 'windwp/nvim-autopairs', config = lua_path"nvim-autopairs" }
   use { 'windwp/nvim-ts-autotag', config = lua_path"vim-closetag"}
   use {'ray-x/lsp_signature.nvim'}
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim"
+  }
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = lua_path"treesitter" }
@@ -53,7 +57,7 @@ return require('packer').startup(function(use)
     "SmiteshP/nvim-navic",
     requires = "neovim/nvim-lspconfig"
   }
-  use { 'HiPhish/nvim-ts-rainbow2' }
+  use { 'HiPhish/rainbow-delimiters.nvim' }
   use { 'RRethy/nvim-treesitter-endwise', config = lua_path"nvim-treesitter-endwise" }
 
   -- Syntax
@@ -104,7 +108,6 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-abolish' }
   use { 'tpope/vim-sleuth' }
   use { 'tpope/vim-bundler' }
-  use { 'tpope/vim-capslock' }
   use { 'tpope/vim-repeat' }
   use { 'tpope/vim-dispatch' }
   use { 'tpope/vim-dadbod' }
@@ -117,12 +120,26 @@ return require('packer').startup(function(use)
   use { 'christoomey/vim-tmux-navigator' }
 
   -- Colorschema
-  use { 'dracula/vim', as = 'dracula' }
-  use { "catppuccin/nvim", as = "catppuccin" }
+  use { 'Mofiqul/dracula.nvim', as = 'dracula',config=lua_path"colorschema"  }
+  -- use { 'shaunsingh/nord.nvim', as = 'nord',config=lua_path"colorschema"  }
+  -- use { "catppuccin/nvim", as = "catppuccin",config=lua_path"colorschema" }
+  -- use { 'tomasiser/vim-code-dark',config=lua_path"colorschema"  }
+  use { 'Mofiqul/vscode.nvim',config=lua_path"colorschema"  }
+  -- use { "patstockwell/vim-monokai-tasty", as = "molokai" }
+  -- use { "tiagovla/tokyodark.nvim", as = "tokyodark" }
+  -- use { "EdenEast/nightfox.nvim", as = "nightfox",config=lua_path"colorschema"  }
+  -- use { "Shatur/neovim-ayu", as = "ayu",config=lua_path"colorschema"  }
+  -- use { "Everblush/everblush.vim",config=lua_path"colorschema"  }
 
   -- Telescope
   use { 'nvim-lua/plenary.nvim' }
   use { 'nvim-telescope/telescope.nvim', config = lua_path"telescope"}
+  use {
+  'VonHeikemen/fine-cmdline.nvim',
+  requires = {
+      {'MunifTanjim/nui.nvim'}
+    }
+  }
 
   -- General Plugins
   use { 'echasnovski/mini.bufremove'}
@@ -130,7 +147,7 @@ return require('packer').startup(function(use)
   use {'MunifTanjim/prettier.nvim', config = lua_path"prettier"}
   use { 'Bekaboo/dropbar.nvim'}
   use { 'folke/edgy.nvim', config = lua_path"edgy" }
-  use { 'rcarriga/nvim-notify', config = lua_path"nvim-notify" }
+  -- use { 'rcarriga/nvim-notify', config = lua_path"nvim-notify" }
   use {"akinsho/toggleterm.nvim", tag = '*', config = lua_path"toggleterm" }
   use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons', config=lua_path"bufferline"}
   use {'kevinhwang91/nvim-ufo', 
@@ -140,10 +157,5 @@ return require('packer').startup(function(use)
     }, 
     config=lua_path"ufo"
   }
-  use{ 'anuvyklack/pretty-fold.nvim',
-   config = function()
-      require('pretty-fold').setup()
-   end
-  }
-
+  use{ 'anuvyklack/pretty-fold.nvim' }
 end)

@@ -44,7 +44,7 @@ vim.keymap.set('n', '<c-S-i>', ':Prettier<CR>', {noremap = true })
 vim.keymap.set('n', '<c-s>', ':update!<CR>', {noremap = true, silent = false})
 vim.keymap.set('v', '<c-s>', ':update!<CR>', {noremap = true, silent = false})
 vim.keymap.set('i', '<c-s>', ':update!<CR>gi', {noremap = true, silent = false})
-vim.keymap.set('n', '<c-q>', ':qall<CR>', {noremap = true, silent = false})
+vim.keymap.set('n', '<c-q>', ':qall!<CR>', {noremap = true, silent = false})
 
 ----------------- NERDTREE --------------------------
 -- vim.keymap.set('n', '<C-b>', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
@@ -127,3 +127,6 @@ vim.keymap.set('n', '<c-k>', 'lua vim.lsp.buf.signature_help()<CR>', {noremap = 
 -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
 vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+
+-----------------Command line -------------------------
+vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', {noremap = true})

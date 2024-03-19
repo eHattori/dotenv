@@ -4,6 +4,9 @@ local lspkind = require'lspkind'
 local nvim_lsp = require'lspconfig'
 local luasnip = require("luasnip")
 
+
+require("mason").setup()
+require("mason-lspconfig").setup()
 require "lsp_signature".setup()
 -- require('pretty-fold').setup()
 

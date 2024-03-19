@@ -13,7 +13,7 @@ vim.opt.laststatus = 3
 vim.opt.title = true
 vim.opt.showcmd = false
 vim.opt.showmode = false
-vim.opt.cmdheight = 2
+vim.opt.cmdheight = 0
 vim.opt.conceallevel = 2
 -- vim.opt.splitright = true
 -- vim.opt.splitbelow = true
@@ -51,10 +51,7 @@ vim.opt.cursorline = true
 vim.opt.swapfile = false
 vim.cmd('syntax enable')
 vim.cmd('syntax on')
-vim.cmd('set t_Co=256')
--- vim.cmd('colorscheme dracula')
-vim.cmd('colorscheme catppuccin-mocha')
-vim.cmd('set background=dark')
+
 vim.cmd([[
     highlight Cursor guifg=black guibg=white
     highlight iCursor guifg=white guibg=steelblue
@@ -67,3 +64,4 @@ vim.cmd([[
     set nofoldenable  
 ]])
 vim.loader.enable()
+
