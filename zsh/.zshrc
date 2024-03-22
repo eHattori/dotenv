@@ -1,8 +1,3 @@
-### Added by Codeium. These lines cannot be automatically removed if modified
-if command -v termium > /dev/null 2>&1; then
-  eval "$(termium shell-hook show pre)"
-fi
-### End of Codeium integration
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -15,6 +10,7 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/hattori/.oh-my-zsh"
+# export TERM=xterm-256color
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -125,6 +121,10 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 ZSH_THEME_VIRTUALENV_PREFIX="("
 ZSH_THEME_VIRTUALENV_SUFFIX=") "
 
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg-7'
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=1000
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+
 ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg_no_bold[cyan]%}->"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -142,11 +142,4 @@ export DOCKERHOST=$(ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+')
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/usr/local/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/bin/google-cloud-sdk/path.zsh.inc'; fi
-
-### Added by Codeium. These lines cannot be automatically removed if modified
-if command -v termium > /dev/null 2>&1; then
-  eval "$(termium shell-hook show post)"
-fi
-### End of Codeium integration
-#
 

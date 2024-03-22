@@ -61,7 +61,7 @@ vim.cmd([[
     set guicursor+=i:blinkwait10
     set clipboard+=unnamedplus
     set foldmethod=syntax
-    set nofoldenable  
+    set nofoldenable
+    set nowrap
 ]])
 vim.loader.enable()
-

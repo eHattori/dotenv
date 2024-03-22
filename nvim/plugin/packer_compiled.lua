@@ -449,86 +449,50 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: indentLine
-time([[Config for indentLine]], true)
-require'plugins.indentLine'
-time([[Config for indentLine]], false)
 -- Config for: formatter.nvim
 time([[Config for formatter.nvim]], true)
 require'plugins.formatter-nvim'
 time([[Config for formatter.nvim]], false)
--- Config for: nvim-treesitter-endwise
-time([[Config for nvim-treesitter-endwise]], true)
-require'plugins.nvim-treesitter-endwise'
-time([[Config for nvim-treesitter-endwise]], false)
--- Config for: edgy.nvim
-time([[Config for edgy.nvim]], true)
-require'plugins.edgy'
-time([[Config for edgy.nvim]], false)
--- Config for: nvim-ts-autotag
-time([[Config for nvim-ts-autotag]], true)
-require'plugins.vim-closetag'
-time([[Config for nvim-ts-autotag]], false)
--- Config for: vscode.nvim
-time([[Config for vscode.nvim]], true)
-require'plugins.colorschema'
-time([[Config for vscode.nvim]], false)
--- Config for: cmp-tabnine
-time([[Config for cmp-tabnine]], true)
-require'plugins.cmp-tabnine'
-time([[Config for cmp-tabnine]], false)
--- Config for: vim-webdevicons
-time([[Config for vim-webdevicons]], true)
-require'plugins.web-devicons'
-time([[Config for vim-webdevicons]], false)
--- Config for: vim-airline
-time([[Config for vim-airline]], true)
-require'plugins.vim-airline'
-time([[Config for vim-airline]], false)
--- Config for: dracula
-time([[Config for dracula]], true)
-require'plugins.colorschema'
-time([[Config for dracula]], false)
--- Config for: toggleterm.nvim
-time([[Config for toggleterm.nvim]], true)
-require'plugins.toggleterm'
-time([[Config for toggleterm.nvim]], false)
--- Config for: friendly-snippets
-time([[Config for friendly-snippets]], true)
-require'plugins.friendly-snippets'
-time([[Config for friendly-snippets]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-require'plugins.telescope'
-time([[Config for telescope.nvim]], false)
--- Config for: bufferline.nvim
-time([[Config for bufferline.nvim]], true)
-require'plugins.bufferline'
-time([[Config for bufferline.nvim]], false)
 -- Config for: vim-autoformat
 time([[Config for vim-autoformat]], true)
 require'plugins.autoformat'
 time([[Config for vim-autoformat]], false)
--- Config for: blamer.nvim
-time([[Config for blamer.nvim]], true)
-require'plugins.blamer'
-time([[Config for blamer.nvim]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-require'plugins.nvim-autopairs'
-time([[Config for nvim-autopairs]], false)
+-- Config for: vim-webdevicons
+time([[Config for vim-webdevicons]], true)
+require'plugins.web-devicons'
+time([[Config for vim-webdevicons]], false)
+-- Config for: nvim-treesitter-endwise
+time([[Config for nvim-treesitter-endwise]], true)
+require'plugins.nvim-treesitter-endwise'
+time([[Config for nvim-treesitter-endwise]], false)
+-- Config for: vim-airline
+time([[Config for vim-airline]], true)
+require'plugins.vim-airline'
+time([[Config for vim-airline]], false)
+-- Config for: nvim-ts-autotag
+time([[Config for nvim-ts-autotag]], true)
+require'plugins.vim-closetag'
+time([[Config for nvim-ts-autotag]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+require'plugins.toggleterm'
+time([[Config for toggleterm.nvim]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+require'plugins.telescope'
+time([[Config for telescope.nvim]], false)
 -- Config for: neo-tree.nvim
 time([[Config for neo-tree.nvim]], true)
 require'plugins.neotree'
 time([[Config for neo-tree.nvim]], false)
--- Config for: nvim-ufo
-time([[Config for nvim-ufo]], true)
-require'plugins.ufo'
-time([[Config for nvim-ufo]], false)
--- Config for: nvim-colorizer.lua
-time([[Config for nvim-colorizer.lua]], true)
-require'plugins.colorizer'
-time([[Config for nvim-colorizer.lua]], false)
+-- Config for: cmp-tabnine
+time([[Config for cmp-tabnine]], true)
+require'plugins.cmp-tabnine'
+time([[Config for cmp-tabnine]], false)
+-- Config for: friendly-snippets
+time([[Config for friendly-snippets]], true)
+require'plugins.friendly-snippets'
+time([[Config for friendly-snippets]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 require'plugins.treesitter'
@@ -537,6 +501,42 @@ time([[Config for nvim-treesitter]], false)
 time([[Config for prettier.nvim]], true)
 require'plugins.prettier'
 time([[Config for prettier.nvim]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+require'plugins.nvim-autopairs'
+time([[Config for nvim-autopairs]], false)
+-- Config for: bufferline.nvim
+time([[Config for bufferline.nvim]], true)
+require'plugins.bufferline'
+time([[Config for bufferline.nvim]], false)
+-- Config for: dracula
+time([[Config for dracula]], true)
+require'plugins.colorschema'
+time([[Config for dracula]], false)
+-- Config for: blamer.nvim
+time([[Config for blamer.nvim]], true)
+require'plugins.blamer'
+time([[Config for blamer.nvim]], false)
+-- Config for: nvim-colorizer.lua
+time([[Config for nvim-colorizer.lua]], true)
+require'plugins.colorizer'
+time([[Config for nvim-colorizer.lua]], false)
+-- Config for: nvim-ufo
+time([[Config for nvim-ufo]], true)
+require'plugins.ufo'
+time([[Config for nvim-ufo]], false)
+-- Config for: indentLine
+time([[Config for indentLine]], true)
+require'plugins.indentLine'
+time([[Config for indentLine]], false)
+-- Config for: vscode.nvim
+time([[Config for vscode.nvim]], true)
+require'plugins.colorschema'
+time([[Config for vscode.nvim]], false)
+-- Config for: edgy.nvim
+time([[Config for edgy.nvim]], true)
+require'plugins.edgy'
+time([[Config for edgy.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
