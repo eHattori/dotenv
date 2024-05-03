@@ -13,7 +13,15 @@ require("nvim-tree").setup({
   sort_by = "case_sensitive",
   view = {
     adaptive_size = true,    
+    width = 80,
+    -- centralize_selection = true,
+    -- preserve_window_proportions = false,
   },
+  -- actions = {
+  --     open_file = {
+  --       resize_window = true,
+  --     },
+  -- },
   renderer = {
     highlight_opened_files = "all",
     root_folder_label = false,
