@@ -14,8 +14,8 @@ vim.keymap.set('n', '<F12>', ':Telescope lsp_definitions<CR>', {noremap = true, 
 vim.api.nvim_set_keymap('n', '<A-Down>', ":m+<CR>==", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-Up>', ":m -2<CR>==", { noremap = true, silent = true })
 --vim.api.nvim_set_keymap('v', '<A-Down>', ":MoveBlock(1)<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<A-Down>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<A-Up>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<A-Down>', ":m '>+1<CR><Esc>gv=gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<A-Up>', ":m '<-2<CR><Esc>gv=gv", { noremap = true, silent = true })
 
 vim.keymap.set('n', '<A-S-Down>', "yyp<Up>", {noremap = true, silent = true})
 
@@ -116,6 +116,10 @@ vim.cmd([[
     nnoremap <silent> <A-.> <cmd>TroubleToggle quickfix<cr>
 
    let g:VM_default_mappings = 0
+   let g:VM_maps = {}
+   let g:VM_maps["Add Cursor Down"]             = '<C-down>'
+   let g:VM_maps["Add Cursor Up"]               = '<C-Up>'
+   let g:VM_theme = 'neon'
 ]])
 
 ---------------- Markdown --------------------------------

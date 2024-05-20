@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/hattori/.cache/nvim/packer_hererocks/2.1.1693350652/share/lua/5.1/?.lua;/home/hattori/.cache/nvim/packer_hererocks/2.1.1693350652/share/lua/5.1/?/init.lua;/home/hattori/.cache/nvim/packer_hererocks/2.1.1693350652/lib/luarocks/rocks-5.1/?.lua;/home/hattori/.cache/nvim/packer_hererocks/2.1.1693350652/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/hattori/.cache/nvim/packer_hererocks/2.1.1693350652/lib/lua/5.1/?.so"
+local package_path_str = "/home/hattori/.cache/nvim/packer_hererocks/2.1.1713484068/share/lua/5.1/?.lua;/home/hattori/.cache/nvim/packer_hererocks/2.1.1713484068/share/lua/5.1/?/init.lua;/home/hattori/.cache/nvim/packer_hererocks/2.1.1713484068/lib/luarocks/rocks-5.1/?.lua;/home/hattori/.cache/nvim/packer_hererocks/2.1.1713484068/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/hattori/.cache/nvim/packer_hererocks/2.1.1713484068/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -111,12 +111,6 @@ _G.packer_plugins = {
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/cmp-rg",
     url = "https://github.com/lukas-reineke/cmp-rg"
   },
-  ["cmp-tabnine"] = {
-    config = { "require'plugins.cmp-tabnine'" },
-    loaded = true,
-    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/cmp-tabnine",
-    url = "https://github.com/tzachar/cmp-tabnine"
-  },
   ["cmp-treesitter"] = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/cmp-treesitter",
@@ -126,6 +120,22 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/hattori/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
+  },
+  ["copilot-cmp"] = {
+    config = { "\27LJ\2\n9\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\16copilot_cmp\frequire\0" },
+    load_after = {},
+    loaded = true,
+    needs_bufread = false,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/opt/copilot-cmp",
+    url = "https://github.com/zbirenbaum/copilot-cmp"
+  },
+  ["copilot.lua"] = {
+    after = { "copilot-cmp" },
+    config = { "require'plugins.cmp-tabnine'" },
+    loaded = true,
+    only_config = true,
+    path = "/home/hattori/.local/share/nvim/site/pack/packer/start/copilot.lua",
+    url = "https://github.com/zbirenbaum/copilot.lua"
   },
   ["csv.vim"] = {
     loaded = true,
@@ -449,30 +459,6 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: formatter.nvim
-time([[Config for formatter.nvim]], true)
-require'plugins.formatter-nvim'
-time([[Config for formatter.nvim]], false)
--- Config for: vim-autoformat
-time([[Config for vim-autoformat]], true)
-require'plugins.autoformat'
-time([[Config for vim-autoformat]], false)
--- Config for: vim-webdevicons
-time([[Config for vim-webdevicons]], true)
-require'plugins.web-devicons'
-time([[Config for vim-webdevicons]], false)
--- Config for: nvim-treesitter-endwise
-time([[Config for nvim-treesitter-endwise]], true)
-require'plugins.nvim-treesitter-endwise'
-time([[Config for nvim-treesitter-endwise]], false)
--- Config for: vim-airline
-time([[Config for vim-airline]], true)
-require'plugins.vim-airline'
-time([[Config for vim-airline]], false)
--- Config for: nvim-ts-autotag
-time([[Config for nvim-ts-autotag]], true)
-require'plugins.vim-closetag'
-time([[Config for nvim-ts-autotag]], false)
 -- Config for: toggleterm.nvim
 time([[Config for toggleterm.nvim]], true)
 require'plugins.toggleterm'
@@ -481,54 +467,78 @@ time([[Config for toggleterm.nvim]], false)
 time([[Config for telescope.nvim]], true)
 require'plugins.telescope'
 time([[Config for telescope.nvim]], false)
--- Config for: neo-tree.nvim
-time([[Config for neo-tree.nvim]], true)
-require'plugins.neotree'
-time([[Config for neo-tree.nvim]], false)
--- Config for: cmp-tabnine
-time([[Config for cmp-tabnine]], true)
-require'plugins.cmp-tabnine'
-time([[Config for cmp-tabnine]], false)
--- Config for: friendly-snippets
-time([[Config for friendly-snippets]], true)
-require'plugins.friendly-snippets'
-time([[Config for friendly-snippets]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-require'plugins.treesitter'
-time([[Config for nvim-treesitter]], false)
--- Config for: prettier.nvim
-time([[Config for prettier.nvim]], true)
-require'plugins.prettier'
-time([[Config for prettier.nvim]], false)
 -- Config for: nvim-autopairs
 time([[Config for nvim-autopairs]], true)
 require'plugins.nvim-autopairs'
 time([[Config for nvim-autopairs]], false)
+-- Config for: vim-webdevicons
+time([[Config for vim-webdevicons]], true)
+require'plugins.web-devicons'
+time([[Config for vim-webdevicons]], false)
+-- Config for: prettier.nvim
+time([[Config for prettier.nvim]], true)
+require'plugins.prettier'
+time([[Config for prettier.nvim]], false)
+-- Config for: nvim-treesitter-endwise
+time([[Config for nvim-treesitter-endwise]], true)
+require'plugins.nvim-treesitter-endwise'
+time([[Config for nvim-treesitter-endwise]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+require'plugins.treesitter'
+time([[Config for nvim-treesitter]], false)
 -- Config for: bufferline.nvim
 time([[Config for bufferline.nvim]], true)
 require'plugins.bufferline'
 time([[Config for bufferline.nvim]], false)
--- Config for: dracula
-time([[Config for dracula]], true)
-require'plugins.colorschema'
-time([[Config for dracula]], false)
--- Config for: blamer.nvim
-time([[Config for blamer.nvim]], true)
-require'plugins.blamer'
-time([[Config for blamer.nvim]], false)
--- Config for: nvim-colorizer.lua
-time([[Config for nvim-colorizer.lua]], true)
-require'plugins.colorizer'
-time([[Config for nvim-colorizer.lua]], false)
 -- Config for: nvim-ufo
 time([[Config for nvim-ufo]], true)
 require'plugins.ufo'
 time([[Config for nvim-ufo]], false)
+-- Config for: blamer.nvim
+time([[Config for blamer.nvim]], true)
+require'plugins.blamer'
+time([[Config for blamer.nvim]], false)
+-- Config for: neo-tree.nvim
+time([[Config for neo-tree.nvim]], true)
+require'plugins.neotree'
+time([[Config for neo-tree.nvim]], false)
+-- Config for: dracula
+time([[Config for dracula]], true)
+require'plugins.colorschema'
+time([[Config for dracula]], false)
 -- Config for: indentLine
 time([[Config for indentLine]], true)
 require'plugins.indentLine'
 time([[Config for indentLine]], false)
+-- Config for: copilot.lua
+time([[Config for copilot.lua]], true)
+require'plugins.cmp-tabnine'
+time([[Config for copilot.lua]], false)
+-- Config for: friendly-snippets
+time([[Config for friendly-snippets]], true)
+require'plugins.friendly-snippets'
+time([[Config for friendly-snippets]], false)
+-- Config for: vim-autoformat
+time([[Config for vim-autoformat]], true)
+require'plugins.autoformat'
+time([[Config for vim-autoformat]], false)
+-- Config for: nvim-ts-autotag
+time([[Config for nvim-ts-autotag]], true)
+require'plugins.vim-closetag'
+time([[Config for nvim-ts-autotag]], false)
+-- Config for: formatter.nvim
+time([[Config for formatter.nvim]], true)
+require'plugins.formatter-nvim'
+time([[Config for formatter.nvim]], false)
+-- Config for: nvim-colorizer.lua
+time([[Config for nvim-colorizer.lua]], true)
+require'plugins.colorizer'
+time([[Config for nvim-colorizer.lua]], false)
+-- Config for: vim-airline
+time([[Config for vim-airline]], true)
+require'plugins.vim-airline'
+time([[Config for vim-airline]], false)
 -- Config for: vscode.nvim
 time([[Config for vscode.nvim]], true)
 require'plugins.colorschema'
@@ -537,6 +547,14 @@ time([[Config for vscode.nvim]], false)
 time([[Config for edgy.nvim]], true)
 require'plugins.edgy'
 time([[Config for edgy.nvim]], false)
+-- Load plugins in order defined by `after`
+time([[Sequenced loading]], true)
+vim.cmd [[ packadd copilot-cmp ]]
+
+-- Config for: copilot-cmp
+try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\16copilot_cmp\frequire\0", "config", "copilot-cmp")
+
+time([[Sequenced loading]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

@@ -7,7 +7,7 @@ local luasnip = require("luasnip")
 
 require("mason").setup()
 require("mason-lspconfig").setup()
-require "lsp_signature".setup()
+-- require "lsp_signature".setup()
 -- require('pretty-fold').setup()
 
 local lspkind = require('lspkind')
@@ -18,6 +18,7 @@ local source_mapping = {
   nvim_lsp = "🚀 LP",
   treesitter = "🪄 TS",
   cmp_tabnine = "💡 TB",
+  copilot = "🙈 CP" ,
   path = "🔧 PT",
   luasnip = "✨ SN",
   rg = "➕ RG",
@@ -27,6 +28,7 @@ local source_mapping = {
 local cmp_kinds = {
   Text = '  ',
   Method = '  ',
+  Copilot = '  ',
   Function = '  ',
   Constructor = '  ',
   Field = " ",
@@ -53,12 +55,37 @@ local cmp_kinds = {
 }
 
 require("luasnip.loaders.from_vscode").lazy_load({})
+local has_words_before = function()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+end
 
+
+local comparators = {}
+
+comparators.score = function (entry1, entry2)
+  if entry1.score and entry2.score then
+    return entry1.score > entry2.score
+  end
+end
+
+comparators.prioritize = function (entry1, entry2)
+  if entry1.copilot and not entry2.copilot then
+    return true
+  elseif entry2.copilot and not entry1.copilot then
+    return false
+  end
+end
+
+
+-- return comparators
 cmp.setup({
   sorting = {
     priority_weight = 2,
     comparators = {
-      require('cmp_tabnine.compare'),
+      comparators.prioritize,
+      -- require('cmp_tabnine.compare'),
       compare.offset,
       compare.exact,
       compare.score,
@@ -91,8 +118,8 @@ cmp.setup({
     ['<Down>'] = cmp.mapping.select_next_item(),
     -- ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
     ['<Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
+      if cmp.visible() and has_words_before() then
+        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
         -- elseif luasnip.expand_or_jumpable() then
         --   vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
       else
@@ -114,26 +141,28 @@ cmp.setup({
     format = function(entry, vim_item)
       local menu = source_mapping[entry.source.name]
       vim_item.kind = cmp_kinds[vim_item.kind]
+      -- vim_item.kind = entry.source.name
       vim_item.menu = menu
-      if entry.source.name == "cmp_tabnine" then
-        local detail = (entry.completion_item.data or {}).detail
-        vim_item.kind = ""
-        if detail and detail:find('.*%%.*') then
-          vim_item.kind = vim_item.kind .. ' ' .. detail
-        end
+      -- if entry.source.name == "cmp_tabnine" then
+      --   local detail = (entry.completion_item.data or {}).detail
+      --   vim_item.kind = ""
+      --   if detail and detail:find('.*%%.*') then
+      --     vim_item.kind = vim_item.kind .. ' ' .. detail
+      --   end
 
-        if (entry.completion_item.data or {}).multiline then
-           vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
-        end
-      end
+      --   if (entry.completion_item.data or {}).multiline then
+      --      vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
+      --   end
+      -- end
 
       local maxwidth = 80
       vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
       return vim_item
     end  },
     sources = cmp.config.sources({
+     { name = "copilot", group_index = 2, keyword_length = 0, priority = 0 },
       { name = 'nvim_lsp', max_item_count = 5 },
-      { name = 'cmp_tabnine', max_item_count = 5 },
+      -- { name = 'cmp_tabnine', max_item_count = 5 },
       { name = 'treesitter', max_item_count = 5 },
       { name = 'luasnip', max_item_count = 5 },
       { name = 'buffer', max_item_count = 2 },
@@ -170,12 +199,13 @@ cmp.setup({
     -- Mappings.
     local opts = { noremap=true, silent=true }
 
-    -- require "lsp_signature".on_attach({
-    --   bind = true, -- This is mandatory, otherwise border config won't get registered.
-    --   handler_opts = {
-    --     border = "rounded"
-    --   }
-    -- }, bufnr)
+    require "lsp_signature".on_attach({
+      bind = true, -- This is mandatory, otherwise border config won't get registered.
+      handler_opts = {
+        border = "rounded"
+      },
+      floating_window = false
+    }, bufnr)
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -189,20 +219,20 @@ cmp.setup({
   -- end
   
   -- Document highlight
-  if client.resolved_capabilities.document_highlight then
-  vim.cmd [[
-    hi! LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-    hi! LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-    hi! LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-    augroup lsp_document_highlight
-      autocmd! * <buffer>
-      autocmd! CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-      autocmd! CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
-      autocmd! CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      autocmd! CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
-    augroup END
-  ]]
-end
+  -- if client.resolved_capabilities.document_highlight then
+  -- vim.cmd [[
+  --   hi! LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
+  --   hi! LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
+  --   hi! LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
+  --   augroup lsp_document_highlight
+  --     autocmd! * <buffer>
+  --     autocmd! CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+  --     autocmd! CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
+  --     autocmd! CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+  --     autocmd! CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
+  --   augroup END
+  -- ]]
+-- end
 
 
   end
@@ -242,7 +272,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
-vim.o.updatetime = 250
+-- vim.o.updatetime = 250
 
 vim.api.nvim_create_autocmd("CursorHold", {
   buffer = bufnr,
@@ -292,3 +322,4 @@ sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=Dia
 ]])
 
 
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})

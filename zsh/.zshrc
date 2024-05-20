@@ -85,6 +85,7 @@ plugins=(
   # pyenv
   # python
   # zsh_reload
+  zsh-completions
   zsh-syntax-highlighting
   zsh-autosuggestions
   kubectl
@@ -111,6 +112,11 @@ export EDITOR='nvim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ll="ls -lahG"
+
+alias reload="source ~/.zshrc"
+
+alias gs="git status"
+alias addalias="code ~/.zshrc" 
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

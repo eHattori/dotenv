@@ -114,7 +114,16 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-jdaddy' }
   use { 'tpope/vim-fugitive' }
   use { 'tpope/vim-commentary' }
-  use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp', config=lua_path"cmp-tabnine"}
+  -- use {'codota/tabnine-nvim', run = "./dl_binaries.sh", config=lua_path"cmp-tabnine"}
+  -- use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp', config=lua_path"cmp-tabnine"}
+  use { "zbirenbaum/copilot.lua", config=lua_path"cmp-tabnine" }
+  use {
+  "zbirenbaum/copilot-cmp",
+  after = { "copilot.lua" },
+  config = function ()
+    require("copilot_cmp").setup()
+  end
+}
 
   -- Tmux
   use { 'christoomey/vim-tmux-navigator' }
