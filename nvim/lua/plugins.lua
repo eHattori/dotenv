@@ -50,6 +50,8 @@ return require('packer').startup(function(use)
     "williamboman/mason-lspconfig.nvim"
   }
 
+  use {"jay-babu/mason-null-ls.nvim", config="mason" }
+
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = lua_path"treesitter" }
   use { 'Yggdroot/indentLine', config = lua_path"indentLine" }
@@ -129,11 +131,12 @@ return require('packer').startup(function(use)
   use { 'christoomey/vim-tmux-navigator' }
 
   -- Colorschema
-  use { 'Mofiqul/dracula.nvim', as = 'dracula',config=lua_path"colorschema"  }
+  -- use { 'Mofiqul/dracula.nvim', as = 'dracula',config=lua_path"colorschema"  }
   -- use { 'shaunsingh/nord.nvim', as = 'nord',config=lua_path"colorschema"  }
   -- use { "catppuccin/nvim", as = "catppuccin",config=lua_path"colorschema" }
   -- use { 'tomasiser/vim-code-dark',config=lua_path"colorschema"  }
   use { 'Mofiqul/vscode.nvim',config=lua_path"colorschema"  }
+  use { 'folke/tokyonight.nvim',config=lua_path"colorschema"  }
   -- use { "patstockwell/vim-monokai-tasty", as = "molokai" }
   -- use { "tiagovla/tokyodark.nvim", as = "tokyodark" }
   -- use { "EdenEast/nightfox.nvim", as = "nightfox",config=lua_path"colorschema"  }
@@ -149,6 +152,7 @@ return require('packer').startup(function(use)
       {'MunifTanjim/nui.nvim'}
     }
   }
+  use { 'ahmedkhalf/project.nvim' }
 
   -- General Plugins
   use { 'echasnovski/mini.bufremove'}

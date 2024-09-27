@@ -1,5 +1,6 @@
 -- setup must be called before loading
-vim.cmd('colorscheme dracula')
+-- vim.cmd('colorscheme dracula')
+vim.cmd('colorscheme tokyonight-night')
 -- vim.cmd('colorscheme catppuccin-mocha')
 -- vim.cmd('let g:vim_monokai_tasty_italic = 1')
 -- vim.cmd('colorscheme vim-monokai-tasty')

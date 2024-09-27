@@ -9,7 +9,17 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 -- require "lsp_signature".setup()
 -- require('pretty-fold').setup()
+require("mason-null-ls").setup({
+  ensure_installed = { "black" }
+})
 
+local null_ls = require("null-ls")
+
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.black,
+  },
+})
 local lspkind = require('lspkind')
 
 
@@ -244,7 +254,7 @@ cmp.setup({
 
 -- -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
   local servers = {
-    'tsserver',
+    'ts_ls',
     'eslint',
     'yamlls',
     'jsonls',
@@ -264,6 +274,16 @@ cmp.setup({
     }
 end
 
+ nvim_lsp['pyright'].setup {
+   on_attach = on_attach,
+   flags = {
+     debounce_text_changes = 150,
+   },
+   capabilities = capabilities,
+   filetypes = { "python" },
+  }
+
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = false,
@@ -274,23 +294,28 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 -- vim.o.updatetime = 250
 
+local opts = {
+  focusable = false,
+  close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+  border = 'rounded',
+  source = 'always',
+  signs = true,
+  prefix = ' ',
+  scope = 'cursor',
+}
 vim.api.nvim_create_autocmd("CursorHold", {
   buffer = bufnr,
   callback = function()
-    local opts = {
-      focusable = false,
-      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-      border = 'rounded',
-      source = 'always',
-      signs = true,
-      prefix = ' ',
-      scope = 'cursor',
-    }
     vim.diagnostic.open_float(nil, opts)
   end
 })
 
+vim.keymap.set('n', '<C-.>', function()
+  vim.diagnostic.open_float(nil, opts)
+end, { noremap = true, silent = true })
+
 vim.cmd([[
+
 
 " gray
 highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080

@@ -4,6 +4,7 @@ vim.cmd([[
     noremap <c-p> :Telescope find_files hidden=true<CR>
     noremap <c-f> :Telescope live_grep <CR>
     noremap <c-]> :Telescope buffers <CR>
+    noremap <a-p> :Telescope projects <CR>
 ]])
 
 vim.keymap.set('n', '<F8>', ':Telescope lsp_references<CR>', {noremap = true, silent = true})
@@ -36,10 +37,10 @@ vim.keymap.set('i', '<c-y>', '<c-o><C-R><CR>', {noremap = true, silent = false})
 
 vim.keymap.set('v', '<C-x>', 'c<CR>', {noremap = true, silent = false})
 
--- vim.keymap.set('n', '<C-i>', ':lua vim.lsp.buf.format()<CR>', {noremap = true })
--- vim.keymap.set('n', '<c-S-i>', ':lua vim.lsp.buf.format()<CR>', {noremap = true })
-vim.keymap.set('n', '<C-i>', ':Prettier<CR>', {noremap = true })
-vim.keymap.set('n', '<c-S-i>', ':Prettier<CR>', {noremap = true })
+vim.keymap.set('n', '<C-i>', ':lua vim.lsp.buf.format()<CR>', {noremap = true })
+vim.keymap.set('n', '<c-S-i>', ':lua vim.lsp.buf.format()<CR>', {noremap = true })
+-- vim.keymap.set('n', '<C-i>', ':Prettier<CR>', {noremap = true })
+-- vim.keymap.set('n', '<c-S-i>', ':Prettier<CR>', {noremap = true })
 -- vim.keymap.set('n', '<c-Down>', ':Prettier<CR>', {noremap = true })
 vim.keymap.set('n', '<c-s>', ':update!<CR>', {noremap = true, silent = false})
 vim.keymap.set('v', '<c-s>', ':update!<CR>', {noremap = true, silent = false})

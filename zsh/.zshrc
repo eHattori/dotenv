@@ -19,7 +19,7 @@ export ZSH="/home/hattori/.oh-my-zsh"
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_THEME="dracula"
-
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -149,3 +149,15 @@ export DOCKERHOST=$(ip -4 addr show docker0 | grep -Po 'inet \K[\d.]+')
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/usr/local/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/bin/google-cloud-sdk/path.zsh.inc'; fi
 
+
+export PYENV_ROOT="$HOME/.pyenv" 
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+eval "$(pyenv virtualenv-init -)"
+
+# Add JBang to environment
+# alias j!=jbang
+# export PATH="$HOME/.jbang/bin:$HOME/.jbang/currentjdk/bin:$PATH"
+# export JAVA_HOME=$HOME/.jbang/currentjdk
+export FONTCONFIG_PATH=/etc/fonts

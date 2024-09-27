@@ -45,7 +45,8 @@ require'nvim-treesitter.configs'.setup {
       'css',
       'lua',
       'xml',
-      'markdown'
+      'markdown',
+      'python'
       }
     },
     indent = {
