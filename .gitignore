@@ -1,2 +1,4 @@
 nvim/plugin
-boti
+config/.ssh/id_rsa_github
+config/.ssh/id_rsa_gitlab
+config/.ssh/id_episource
